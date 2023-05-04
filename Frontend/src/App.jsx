@@ -1,15 +1,12 @@
-import React from 'react'
-import styled from 'styled-components'
-import WinesInMyCave from './Components/WinesInMyCave/WinesInMyCave'
-import './App.css'
+import React from "react";
+import styled from "styled-components";
+import WinesInMyCave from "./Components/WinesInMyCave/WinesInMyCave";
+import "./App.css";
 
 function App() {
-  return (
-    <WinesInMyCave />
-  )
+  return <WinesInMyCave />;
 }
 
-export default App
+export default App;
 
-const Main = styled.div`
-`
+const Main = styled.div``;

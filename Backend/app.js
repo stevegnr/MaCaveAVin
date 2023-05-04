@@ -196,10 +196,4 @@ app.post("/api/wines", (req, res, next) => {
     .catch((err) => res.status(400).json({ err }));
 });
 
-app.delete("/api/wines/:id", (req, res, next) => {
-  Wine.deleteOne({ id: "64535e904228896a789a8e7e" })
-    .then(() => res.status(200).json({ message: "Supprimé !" }))
-    .catch((err) => res.status(404).json({ err }));
-});
-
 module.exports = app;
