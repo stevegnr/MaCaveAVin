@@ -13,6 +13,7 @@ const wineSchema = mongoose.Schema({
   bestBefore: { type: Date, default: null },
   country: { type: String, default: "France" },
   tag: { type: String },
+  quantity: {type: Number, required: true, default: 1}
 });
 
 module.exports = mongoose.model("Wine", wineSchema);

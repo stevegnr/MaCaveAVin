@@ -49,6 +49,7 @@ const data = [
     bestBefore: 7,
     country: "France",
     tag: "cndp",
+    quantity: 5
   },
   {
     name: "Bourgogne Hautes Côtes de Beaune ",
@@ -65,6 +66,7 @@ const data = [
     bestBefore: 10,
     country: "France",
     tag: "hcdn",
+    quantity: 5
   },
   {
     name: "Pi Vell",
@@ -81,6 +83,7 @@ const data = [
     bestBefore: 5,
     country: "France",
     tag: "pivell",
+    quantity: 5
   },
   {
     name: "Riesling Collection Privée",
@@ -97,6 +100,7 @@ const data = [
     bestBefore: 3,
     country: "France",
     tag: "riesling",
+    quantity: 5
   },
   {
     name: "Haut Rian",
@@ -113,6 +117,7 @@ const data = [
     bestBefore: 2,
     country: "France",
     tag: "haut_rian",
+    quantity: 5
   },
   {
     name: "Les Jamelles Chardonnay",
@@ -129,6 +134,7 @@ const data = [
     bestBefore: 2,
     country: "France",
     tag: "jamelles",
+    quantity: 5
   },
   {
     name: "Chianti Riserva",
@@ -146,6 +152,7 @@ const data = [
     bestBefore: 7,
     country: "Italy",
     tag: "chianti",
+    quantity: 5
   },
 ];
 
@@ -155,10 +162,44 @@ Wine.insertMany(data)
   })
   .catch((err) => console.error(err));
 
+// Récupère toutes les références
 app.get("/api/wines", (req, res, next) => {
   Wine.find()
     .then((wines) => res.status(200).json(wines))
     .catch((err) => res.status(400).json({ err }));
+});
+
+// Crée une nouvelle référence
+app.post("/api/wines", (req, res, next) => {
+  const wine = new Wine({
+    name: "TEST",
+    domain: "TEST",
+    region: "TEST",
+    year: 2019,
+    color: "TEST",
+    price: 9.35,
+    grapeVariety: {
+      Sangiovese: 50,
+      Canailo: 50,
+    },
+    biologic: true,
+    bestAfter: 2,
+    bestBefore: 7,
+    country: "TEST",
+    tag: "TEST",
+    quantity: 5
+  });
+
+  wine
+    .save()
+    .then(() => res.status(201).json({ message: "Enregistré !" }))
+    .catch((err) => res.status(400).json({ err }));
+});
+
+app.delete("/api/wines/:id", (req, res, next) => {
+  Wine.deleteOne({ id: "64535e904228896a789a8e7e" })
+    .then(() => res.status(200).json({ message: "Supprimé !" }))
+    .catch((err) => res.status(404).json({ err }));
 });
 
 module.exports = app;
