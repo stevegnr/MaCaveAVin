@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import styled from "styled-components";
-import Modal from "../Modal/Modal";
+import Modal from "../Modal/WineModal";
 
 function Header() {
   const [show, setShow] = useState(false);
