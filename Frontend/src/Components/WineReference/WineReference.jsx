@@ -12,13 +12,14 @@ function WineReference({
   price,
   biologic,
   bestAfter,
+  bestBefore,
   country,
   cover,
   quantity,
 }) {
   // Remplace la string 'true' ou 'false' par le boolean équivalent
   biologic = biologic === "true";
-  console.log(color, typeof (color));
+
 
   return (
     <WineRef key={id}>
@@ -97,19 +98,18 @@ const Color = styled.div`
   width: 100%;
   height: 20px;
   background: ${(props) => {
-  console.log(props.color);
   
     switch (props.color) {
       case "red":
-        return "red";
+        return "#ac1c35";
         break;
 
       case "pink":
-        return "pink";
+        return "#dd81a4";
         break;
 
       case "white":
-        return "yellow";
+        return "#ede239";
         break;
 
       default:

@@ -11,6 +11,7 @@ function WineShowed({
   price,
   biologic,
   bestAfter,
+  bestBefore,
   country,
   cover,
 }) {
@@ -24,6 +25,9 @@ function WineShowed({
       <p>{price}€</p>
       <p>{biologic}</p>
       <p>{country}</p>
+      <p>{bestAfter}</p>
+      <p>{bestBefore}</p>
+      <p>{cover}</p>
     </WineShow>
   );
 }
@@ -31,5 +35,5 @@ function WineShowed({
 export default WineShowed;
 
 const WineShow = styled.div`
-  width: 22.4%;
+  width: 22%;
 `;

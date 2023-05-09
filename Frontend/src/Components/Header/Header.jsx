@@ -6,16 +6,15 @@ function Header() {
   const [show, setShow] = useState(false);
 
   return (
-    <Menu >
+    <Menu>
       <Banner>
         <h1>🍷 Ma Cave à Vin</h1>
-        <button onClick={() => setShow(true)}>Ajouter une référence</button>
+        <AddRef onClick={() => setShow(true)}>+</AddRef>
       </Banner>
       <Modal
         title="Nouvelle référence"
         show={show}
-        onClose={() => setShow(false)}
-      ></Modal>
+        onClose={() => setShow(false)}></Modal>
     </Menu>
   );
 }
@@ -25,8 +24,9 @@ export default Header;
 const Banner = styled.div`
   display: flex;
   align-items: center;
+  justify-content: space-between;
   height: 50px;
-  background: linear-gradient(#ac1c35, #bc1124);
+  background-color: #ac1c35;
   color: white;
   border: 1px solid black;
   position: fixed;
@@ -58,6 +58,16 @@ const WineModal = styled.div`
 `;
 
 const Menu = styled.div`
+`;
+
+const AddRef = styled.div`
+  width: 30px;
+  height: 30px;
+  border: 5px solid white;
+  border-radius: 50%;
   display: flex;
-  justify-content: space;
+  justify-content: center;
+  align-items: center;
+  font-size: 3em;
+  margin-right: 30px;
 `

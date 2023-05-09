@@ -176,7 +176,7 @@ app.post("/api/wines", (req, res, next) => {
     domain: req.body.domain,
     region: req.body.region,
     year: req.body.year,
-    color: req.body.year,
+    color: req.body.color,
     price: req.body.price,
     grapeVariety: req.body.grapeVariety,
     biologic: req.body.biologic,

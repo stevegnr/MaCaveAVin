@@ -20,7 +20,6 @@ function WinesInMyCave() {
     fetchWine();
   }, []);
 
-
   return (
     <Main>
       <WineShowed />
@@ -43,10 +42,10 @@ function WinesInMyCave() {
               bestAfter,
               country,
               cover,
-              quantity
+              quantity,
             }) => (
               <WineReference
-                key={id}
+                id={id}
                 name={name}
                 domain={domain}
                 region={region}
@@ -75,9 +74,10 @@ const WinesWindow = styled.div`
   flex-wrap: wrap;
   gap: 20px;
   padding: 10px;
-  `;
+`;
 
 const Main = styled.div`
-height: 80vh;
+  height: 80vh;
   display: flex;
+  margin-top: 50px;
 `;
