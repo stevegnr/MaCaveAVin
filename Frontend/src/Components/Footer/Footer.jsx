@@ -16,7 +16,7 @@ align-items: center;
 height: 10vh;
 background: linear-gradient(#AC1C35, #BC1124);
 color: white;
-font-size: 1.2em;
+font-size: 20px;
 position: fixed;
 bottom: 0;
 left: 0;

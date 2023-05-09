@@ -32,5 +32,4 @@ export default WineShowed;
 
 const WineShow = styled.div`
   width: 22.4%;
-  height: 80vh;
 `;

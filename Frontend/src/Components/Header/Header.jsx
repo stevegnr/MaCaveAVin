@@ -9,13 +9,13 @@ function Header() {
     <>
       <Banner>
         <h1>🍷 Ma Cave à Vin</h1>
-        <button onClick={() => setShow(true)}>Show Modal</button>
+        <button onClick={() => setShow(true)}>Ajouter une référence</button>
       </Banner>
       <Modal
-        title="My Modal"
+        title="Nouvelle référence"
         show={show}
         onClose={() => setShow(false)}
-      ><p>This is my modal body</p></Modal>
+      ></Modal>
     </>
   );
 }

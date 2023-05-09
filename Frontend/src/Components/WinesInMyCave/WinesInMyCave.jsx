@@ -69,14 +69,16 @@ function WinesInMyCave() {
 
 export default WinesInMyCave;
 
-const WinesWindow = styled.ul`
-  height: 80vh;
+const WinesWindow = styled.div`
   width: 75%;
   display: flex;
   flex-wrap: wrap;
+  gap: 20px;
   border-left: 1px solid black;
-`;
+  padding: 10px;
+  `;
 
 const Main = styled.div`
+height: 80vh;
   display: flex;
 `;

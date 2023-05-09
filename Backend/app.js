@@ -49,7 +49,7 @@ const data = [
     bestBefore: 7,
     country: "France",
     tag: "cndp",
-    quantity: 5
+    quantity: 5,
   },
   {
     name: "Bourgogne Hautes Côtes de Beaune ",
@@ -66,7 +66,7 @@ const data = [
     bestBefore: 10,
     country: "France",
     tag: "hcdn",
-    quantity: 5
+    quantity: 5,
   },
   {
     name: "Pi Vell",
@@ -83,7 +83,7 @@ const data = [
     bestBefore: 5,
     country: "France",
     tag: "pivell",
-    quantity: 5
+    quantity: 5,
   },
   {
     name: "Riesling Collection Privée",
@@ -100,7 +100,7 @@ const data = [
     bestBefore: 3,
     country: "France",
     tag: "riesling",
-    quantity: 5
+    quantity: 5,
   },
   {
     name: "Haut Rian",
@@ -117,7 +117,7 @@ const data = [
     bestBefore: 2,
     country: "France",
     tag: "haut_rian",
-    quantity: 5
+    quantity: 5,
   },
   {
     name: "Les Jamelles Chardonnay",
@@ -134,7 +134,7 @@ const data = [
     bestBefore: 2,
     country: "France",
     tag: "jamelles",
-    quantity: 5
+    quantity: 5,
   },
   {
     name: "Chianti Riserva",
@@ -152,7 +152,7 @@ const data = [
     bestBefore: 7,
     country: "Italy",
     tag: "chianti",
-    quantity: 5
+    quantity: 5,
   },
 ];
 
@@ -172,27 +172,24 @@ app.get("/api/wines", (req, res, next) => {
 // Crée une nouvelle référence
 app.post("/api/wines", (req, res, next) => {
   const wine = new Wine({
-    name: "TEST",
-    domain: "TEST",
-    region: "TEST",
-    year: 2019,
-    color: "TEST",
-    price: 9.35,
-    grapeVariety: {
-      Sangiovese: 50,
-      Canailo: 50,
-    },
-    biologic: true,
-    bestAfter: 2,
-    bestBefore: 7,
-    country: "TEST",
-    tag: "TEST",
-    quantity: 5
+    name: req.body.name,
+    domain: req.body.domain,
+    region: req.body.region,
+    year: req.body.year,
+    color: req.body.year,
+    price: req.body.price,
+    grapeVariety: req.body.grapeVariety,
+    biologic: req.body.biologic,
+    bestAfter: req.body.bestAfter,
+    bestBefore: req.body.bestBefore,
+    country: req.body.country,
+    tag: req.body.tag,
+    quantity: req.body.quantity,
   });
 
   wine
     .save()
-    .then(() => res.status(201).json({ message: "Enregistré !" }))
+    .then(() => console.log("Référence enregistrée !"))
     .catch((err) => res.status(400).json({ err }));
 });
 

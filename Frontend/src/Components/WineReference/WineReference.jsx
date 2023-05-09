@@ -1,60 +1,99 @@
-import React from 'react'
-import styled from 'styled-components'
-import frenchFlag from '../../assets/flag-france.png'
+import React from "react";
+import styled from "styled-components";
+import frenchFlag from "../../assets/flag-france.png";
 
-function WineReference({ id, name, domain, region, year, color, price, biologic, bestAfter, country, cover, quantity }) {
+function WineReference({
+  id,
+  name,
+  domain,
+  region,
+  year,
+  color,
+  price,
+  biologic,
+  bestAfter,
+  country,
+  cover,
+  quantity,
+}) {
+  // Remplace la string 'true' ou 'false' par le boolean équivalent
+  biologic = biologic === "true";
+
   return (
     <WineRef key={id}>
- {/*      <h3>{name}</h3>
+      <div>
+        <Color/>
+        <h3>
+          {name} {biologic && "🍀"}
+        </h3>
+      </div>
+
       <p>{domain}</p>
       <p>{region}</p>
       <p>{year}</p>
 
-      <h3>x {quantity}</h3>
       <Etiquette src={cover} />
 
       <PriceAndFlag>
-        <h3>{price}€</h3> <div>{biologic && '🍀'}</div><div>{country === 'France' && <Flag src={frenchFlag} />}</div>
-
-      </PriceAndFlag> */}
+        <div>{country === "France" && <Flag src={frenchFlag} />}</div>
+        <div>{price}€</div>
+        <Quantity>x {quantity}</Quantity>
+      </PriceAndFlag>
     </WineRef>
-  )
+  );
 }
 
-export default WineReference
+export default WineReference;
 
 const WineRef = styled.div`
-  /* 
-margin: 10px ;
-padding: 5px;
-align-content: center;
-background-color: #e6d7d7;
-:hover {
-  background-color: #b4b1ac;
-}
-transform: scale(1.01); */
   border: 1px solid black;
-  width: 150px;
+  width: 200px;
+  height: 250px;
+  background-color: #cababa;
+  /* background-color: ${(props) =>
+    props.color === "red" ? "red" : "white"}; */
+  padding: 5px;
+  position: relative;
 `;
 
 const Flag = styled.img`
-/* height: 30px; */
-`
+  height: 30px;
+`;
 
 const PriceAndFlag = styled.div`
-/* width: 90%;
-display: flex;
-justify-content: space-between;
-align-items: center ;
-position: absolute;
-bottom: 0; */
-`
+  width: 90%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+`;
 
 const Etiquette = styled.img`
-/* width: 90%;
-height: 35%;
-border-radius: 10%;
-bottom: 15%;
-left: 50%;
-transform: translate(-50%); */
+  width: 90%;
+  height: 35%;
+  border-radius: 5px;
+  left: 50%;
+  bottom: 40px;
+  transform: translate(-50%);
+  position: absolute;
+  border: 1px solid black;
+`;
+
+const Quantity = styled.div`
+  border-radius: 50%;
+  border: 1px solid black;
+  background-color: white;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+`;
+
+const Color = styled.div`
+  width: 100%;
+  height: 20px;
+  background: red;
 `

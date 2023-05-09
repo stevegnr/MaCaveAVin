@@ -9,4 +9,5 @@ function App() {
 
 export default App;
 
-const Main = styled.div``;
+const Main = styled.div`
+font-family: M`;
