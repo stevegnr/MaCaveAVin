@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 
-function Modal({ title, show, onClose }) {
+function WineModal({ title, show, onClose }) {
   if (!show) {
     return null;
   }
@@ -19,7 +19,6 @@ function Modal({ title, show, onClose }) {
   const [bestAfter, setBestAfter] = useState(year + 2);
 
   function onSubmit() {
-
     const formData = {
       name: name,
       year: year,
@@ -33,7 +32,7 @@ function Modal({ title, show, onClose }) {
       bestBefore: bestBefore,
       bestAfter: bestAfter,
     };
-
+    onClose();
     console.log(formData);
 
     fetch("http://localhost:3000/api/wines", {
@@ -233,7 +232,7 @@ function Modal({ title, show, onClose }) {
   );
 }
 
-export default Modal;
+export default WineModal;
 
 const ModalOverlay = styled.div`
   position: fixed;

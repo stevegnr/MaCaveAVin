@@ -13,7 +13,7 @@ const Foot = styled.div`
 display: flex;
 justify-content: right;
 align-items: center;
-height: 10vh;
+height: 50px;
 background: linear-gradient(#AC1C35, #BC1124);
 color: white;
 font-size: 20px;
