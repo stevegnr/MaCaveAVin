@@ -45,8 +45,8 @@ const data = [
       Cinsault: 5,
     },
     biologic: false,
-    bestAfter: 2,
-    bestBefore: 7,
+    bestAfter: 2020,
+    bestBefore: 2025,
     country: "France",
     tag: "cndp",
     quantity: 5,
@@ -62,8 +62,8 @@ const data = [
       "Pinot noir": 100,
     },
     biologic: false,
-    bestAfter: 5,
-    bestBefore: 10,
+    bestAfter: 2025,
+    bestBefore: 2030,
     country: "France",
     tag: "hcdn",
     quantity: 5,
@@ -79,8 +79,8 @@ const data = [
       Macabeu: 100,
     },
     biologic: true,
-    bestAfter: 2,
-    bestBefore: 5,
+    bestAfter: 2022,
+    bestBefore: 2025,
     country: "France",
     tag: "pivell",
     quantity: 5,
@@ -96,8 +96,8 @@ const data = [
       Riesling: 100,
     },
     biologic: false,
-    bestAfter: 1,
-    bestBefore: 3,
+    bestAfter: 2021,
+    bestBefore: 2023,
     country: "France",
     tag: "riesling",
     quantity: 5,
@@ -113,8 +113,8 @@ const data = [
       Merlot: 100,
     },
     biologic: false,
-    bestAfter: 0,
-    bestBefore: 2,
+    bestAfter: 2020,
+    bestBefore: 2022,
     country: "France",
     tag: "haut_rian",
     quantity: 5,
@@ -130,8 +130,8 @@ const data = [
       Chardonnay: 100,
     },
     biologic: false,
-    bestAfter: 0,
-    bestBefore: 2,
+    bestAfter: 2021,
+    bestBefore: 2022,
     country: "France",
     tag: "jamelles",
     quantity: 5,
@@ -148,8 +148,8 @@ const data = [
       Canailo: 50,
     },
     biologic: true,
-    bestAfter: 2,
-    bestBefore: 7,
+    bestAfter: 2022,
+    bestBefore: 2027,
     country: "Italy",
     tag: "chianti",
     quantity: 5,
@@ -191,6 +191,13 @@ app.post("/api/wines", (req, res, next) => {
     .save()
     .then(() => console.log("Référence enregistrée !"))
     .catch((err) => res.status(400).json({ err }));
+});
+
+// Met une référence en évidence
+app.get(`/api/wines/:id`, (req, res, next) => {
+  Wine.findById({id: req.params.id})
+    .then((wines) => res.status(200).json(wines))
+    .catch((err) => res.status(404).json({ err }));
 });
 
 module.exports = app;

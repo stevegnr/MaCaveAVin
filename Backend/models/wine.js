@@ -9,11 +9,11 @@ const wineSchema = mongoose.Schema({
   price: { type: Number },
   grapeVariety: { type: Array },
   biologic: { type: String },
-  bestAfter: { type: Date, default: null },
-  bestBefore: { type: Date, default: null },
+  bestAfter: { type: Number, default: null },
+  bestBefore: { type: Number, default: null },
   country: { type: String, default: "France" },
   tag: { type: String },
-  quantity: {type: Number, required: true, default: 1}
+  quantity: { type: Number, required: true, default: 1 },
 });
 
 module.exports = mongoose.model("Wine", wineSchema);

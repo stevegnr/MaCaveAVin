@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import frenchFlag from "../../assets/flag-france.png";
+import { WineContext } from "../../../Context/WineContext";
 
 function WineReference({
   id,
@@ -14,15 +15,33 @@ function WineReference({
   bestAfter,
   bestBefore,
   country,
-  cover,
+  tag,
   quantity,
 }) {
   // Remplace la string 'true' ou 'false' par le boolean équivalent
   biologic = biologic === "true";
-
+  const { setShowed } = useContext(WineContext);
 
   return (
-    <WineRef key={id}>
+    <WineRef
+      key={id}
+      onClick={() =>
+        setShowed({
+          id: id,
+          name: name,
+          domain: domain,
+          region: region,
+          year: year,
+          color: color,
+          price: price,
+          biologic: biologic,
+          bestAfter: bestAfter,
+          bestBefore: bestBefore,
+          country: country,
+          tag: tag,
+          quantity: quantity,
+        })
+      }>
       <div>
         <Color color={color} />
         <h3>
@@ -32,9 +51,14 @@ function WineReference({
 
       <p>{domain}</p>
       <p>{region}</p>
-      <p>{year}</p>
+      <Year>
+        <p>{year}</p>
+        <p>
+          {bestAfter} - {bestBefore}
+        </p>
+      </Year>
 
-      <Etiquette src={cover} />
+      <Etiquette src={tag} />
 
       <PriceAndFlag>
         <div>{country === "France" && <Flag src={frenchFlag} />}</div>
@@ -52,10 +76,11 @@ const WineRef = styled.div`
   width: 200px;
   height: 250px;
   background-color: #cababa;
-  /* background-color: ${(props) =>
-    props.color === "red" ? "red" : "white"}; */
   padding: 5px;
   position: relative;
+  :hover {
+    background-color: lightgray;
+  }
 `;
 
 const Flag = styled.img`
@@ -98,7 +123,6 @@ const Color = styled.div`
   width: 100%;
   height: 20px;
   background: ${(props) => {
-  
     switch (props.color) {
       case "red":
         return "#ac1c35";
@@ -117,4 +141,9 @@ const Color = styled.div`
         break;
     }
   }};
+`;
+
+const Year = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;
