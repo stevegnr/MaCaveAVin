@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import { WineContext } from "../../../Context/WineContext";
+import Color from "../Color/Color";
 
 function WineShowed() {
   const { showed } = useContext(WineContext);
@@ -8,11 +9,12 @@ function WineShowed() {
   if (showed) {
     return (
       <WineShow>
+        <Color color={showed.color} />
         <h2>{showed.name}</h2>
         <p>{showed.domain}</p>
         <p>{showed.region}</p>
         <p>{showed.year}</p>
-        <p>{showed.color}</p>
+        <p>{showed.quantity} en stock.</p>
         <p>{showed.price}€</p>
         <p>{showed.biologic}</p>
         <p>{showed.country}</p>
@@ -30,5 +32,7 @@ export default WineShowed;
 
 const WineShow = styled.div`
   width: 22%;
-  padding: 20px;
+  margin: 10px;
+  border: 1px solid black;
+  padding: 5px;
 `;

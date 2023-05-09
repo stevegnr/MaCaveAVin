@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import frenchFlag from "../../assets/flag-france.png";
 import { WineContext } from "../../../Context/WineContext";
+import Color from "../Color/Color";
 
 function WineReference({
   id,
@@ -117,30 +118,6 @@ const Quantity = styled.div`
   justify-content: center;
   align-items: center;
   font-weight: bold;
-`;
-
-const Color = styled.div`
-  width: 100%;
-  height: 20px;
-  background: ${(props) => {
-    switch (props.color) {
-      case "red":
-        return "#ac1c35";
-        break;
-
-      case "pink":
-        return "#dd81a4";
-        break;
-
-      case "white":
-        return "#ede239";
-        break;
-
-      default:
-        return "white";
-        break;
-    }
-  }};
 `;
 
 const Year = styled.div`
