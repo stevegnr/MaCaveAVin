@@ -84,6 +84,9 @@ const WinesWindow = styled.div`
   flex-wrap: wrap;
   gap: 20px;
   padding: 10px;
+  position: relative;
+  right: 0;
+  left: 23%;
 `;
 
 const Main = styled.div`

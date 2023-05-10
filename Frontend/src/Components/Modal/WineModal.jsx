@@ -87,6 +87,7 @@ function WineModal({ title, show, onClose }) {
                   Année :
                   <input
                     type="number"
+                    name="year"
                     min="1900"
                     max="2024"
                     step="1"
