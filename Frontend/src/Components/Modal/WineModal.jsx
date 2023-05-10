@@ -79,7 +79,7 @@ function WineModal({ title, show, onClose }) {
                     value={name}
                     type="text"
                     name="name"
-                    id="name"
+                    _id="name"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </label>
@@ -101,7 +101,7 @@ function WineModal({ title, show, onClose }) {
                   Couleur :
                   <select
                     name="color"
-                    id="color"
+                    _id="color"
                     onChange={(e) => setColor(e.target.value)}
                     defaultValue={color}>
                     <option value="red">Rouge</option>
@@ -118,7 +118,7 @@ function WineModal({ title, show, onClose }) {
                     defaultValue={quantity}
                     step={1}
                     name="quantity"
-                    id="quantity"
+                    _id="quantity"
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </label>
@@ -127,7 +127,7 @@ function WineModal({ title, show, onClose }) {
                   <input
                     type="number"
                     name="price"
-                    id="price"
+                    _id="price"
                     min="0"
                     step="0.01"
                     defaultValue={price}
@@ -144,7 +144,7 @@ function WineModal({ title, show, onClose }) {
                   <input
                     type="text"
                     name="domain"
-                    id="domain"
+                    _id="domain"
                     onChange={(e) => setDomain(e.target.value)}
                     defaultValue={domain}
                   />
@@ -154,7 +154,7 @@ function WineModal({ title, show, onClose }) {
                   <input
                     type="text"
                     name="region"
-                    id="region"
+                    _id="region"
                     onChange={(e) => setRegion(e.target.value)}
                     defaultValue={region}
                   />
@@ -166,7 +166,7 @@ function WineModal({ title, show, onClose }) {
                   <input
                     type="text"
                     name="country"
-                    id="country"
+                    _id="country"
                     onChange={(e) => setCountry(e.target.value)}
                     defaultValue={country}
                   />
@@ -178,7 +178,7 @@ function WineModal({ title, show, onClose }) {
                     <input
                       type="radio"
                       name="bio"
-                      id="bio"
+                      _id="bio"
                       onChange={(e) => setBiologic(true)}
                     />
                   </label>
@@ -187,7 +187,7 @@ function WineModal({ title, show, onClose }) {
                     <input
                       type="radio"
                       name="bio"
-                      id="notbio"
+                      _id="notbio"
                       defaultChecked
                       onChange={(e) => setBiologic(false)}
                     />
@@ -206,7 +206,7 @@ function WineModal({ title, show, onClose }) {
                   min={0}
                   step={1}
                   name="bestAfter"
-                  id="bestAfter"
+                  _id="bestAfter"
                   onChange={(e) => setBestBefore(e.target.value)}
                   defaultValue={+year + 1}
                 />
@@ -220,7 +220,7 @@ function WineModal({ title, show, onClose }) {
                   min={0}
                   step={1}
                   name="bestBefore"
-                  id="bestBefore"
+                  _id="bestBefore"
                   onChange={(e) => setBestAfter(e.target.value)}
                   defaultValue={+year + 2}
                 />

@@ -5,7 +5,7 @@ import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import Color from "../Color/Color";
 
 function WineReference({
-  id,
+  _id,
   name,
   domain,
   region,
@@ -22,14 +22,14 @@ function WineReference({
   // Remplace la string 'true' ou 'false' par le boolean équivalent
   biologic = biologic === "true";
   const context = useContext(MaCaveAVinContext);
-  const setShowed  = context.WineContext.setShowed;
+  const setShowed = context.WineContext.setShowed;
 
   return (
     <WineRef
-      key={id}
+      key={_id}
       onClick={() =>
         setShowed({
-          id: id,
+          _id: _id,
           name: name,
           domain: domain,
           region: region,

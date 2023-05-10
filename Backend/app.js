@@ -193,11 +193,8 @@ app.post("/api/wines", (req, res, next) => {
     .catch((err) => res.status(400).json({ err }));
 });
 
-// Met une référence en évidence
-app.get(`/api/wines/:id`, (req, res, next) => {
-  Wine.findById({id: req.params.id})
-    .then((wines) => res.status(200).json(wines))
-    .catch((err) => res.status(404).json({ err }));
-});
+// Modifie la quantité de la référence mise en évidence
+
+
 
 module.exports = app;
