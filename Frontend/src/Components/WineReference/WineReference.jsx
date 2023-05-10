@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import styled from "styled-components";
 import frenchFlag from "../../assets/flag-france.png";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
-import Color from "../Color/Color";
+import Color from "../../utils/Color/Color";
 
 function WineReference({
   _id,

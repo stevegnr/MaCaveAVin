@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
-import Color from "../Color/Color";
+import Color from "../../utils/Color/Color";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 
 function WineShowed() {

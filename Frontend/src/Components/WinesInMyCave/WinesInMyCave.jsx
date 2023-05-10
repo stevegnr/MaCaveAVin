@@ -3,6 +3,7 @@ import styled from "styled-components";
 import WineReference from "../WineReference/WineReference";
 import WineShowed from "../WineShowed/WineShowed";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
+import Loader from "../../utils/Loader/Loader";
 
 function WinesInMyCave() {
   const [winesList, setWinesList] = useState([]);
@@ -30,15 +31,9 @@ function WinesInMyCave() {
   return (
     <Main>
       <WineShowed showed={showed} />
-      {!isDataLoading ? (
-        <WinesWindow>
-          <div>
-            <p>Chargement...</p>
-          </div>
-        </WinesWindow>
-      ) : (
-        <WinesWindow>
-          {winesList.map(
+      <WinesWindow>
+        {!isDataLoading ? (
+          winesList.map(
             ({
               _id,
               name,
@@ -71,9 +66,13 @@ function WinesInMyCave() {
                 quantity={quantity}
               />
             )
-          )}
-        </WinesWindow>
-      )}
+          )
+        ) : (
+          <LoadingContainer>
+            <Loader />
+          </LoadingContainer>
+        )}
+      </WinesWindow>
     </Main>
   );
 }
@@ -94,4 +93,12 @@ const WinesWindow = styled.div`
 const Main = styled.div`
   display: flex;
   margin: 50px 0;
+`;
+
+const LoadingContainer = styled.div`
+  width: 100%;
+  height: 82vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
