@@ -22,7 +22,7 @@ function WineModal({ title, show, onClose }) {
   const context = useContext(MaCaveAVinContext);
   const { newRef, setNewRef } = context.NewRefContext;
 
-  function onSubmit() {
+  async function onSubmit() {
     const formData = {
       name: name,
       year: year,
@@ -38,7 +38,7 @@ function WineModal({ title, show, onClose }) {
     };
     onClose();
 
-    fetch("http://localhost:3000/api/wines", {
+    await fetch("http://localhost:3000/api/wines", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -50,9 +50,6 @@ function WineModal({ title, show, onClose }) {
           throw new Error("Network response was not ok");
         }
         return response.json();
-      })
-      .then((data) => {
-        console.log(data);
       })
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);

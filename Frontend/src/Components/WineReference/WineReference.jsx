@@ -5,7 +5,7 @@ import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import Color from "../Color/Color";
 
 function WineReference({
-  key,
+  _id,
   name,
   domain,
   region,
@@ -26,10 +26,9 @@ function WineReference({
 
   return (
     <WineRef
-      key={key}
       onClick={() =>
         setShowed({
-          _id: key,
+          _id: _id,
           name: name,
           domain: domain,
           region: region,
@@ -65,7 +64,7 @@ function WineReference({
       <PriceAndFlag>
         <div>{country === "France" && <Flag src={frenchFlag} />}</div>
         <div>{price}€</div>
-        <Quantity>x {quantity}</Quantity>
+        <Quantity>x{quantity}</Quantity>
       </PriceAndFlag>
     </WineRef>
   );

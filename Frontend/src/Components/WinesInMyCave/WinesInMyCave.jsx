@@ -30,10 +30,12 @@ function WinesInMyCave() {
   return (
     <Main>
       <WineShowed showed={showed} />
-      {isDataLoading ? (
-        <div>
-          <p>Chargement...</p>
-        </div>
+      {!isDataLoading ? (
+        <WinesWindow>
+          <div>
+            <p>Chargement...</p>
+          </div>
+        </WinesWindow>
       ) : (
         <WinesWindow>
           {winesList.map(
@@ -54,6 +56,7 @@ function WinesInMyCave() {
             }) => (
               <WineReference
                 key={_id}
+                _id={_id}
                 name={name}
                 domain={domain}
                 region={region}

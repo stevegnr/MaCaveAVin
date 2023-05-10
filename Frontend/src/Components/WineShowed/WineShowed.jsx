@@ -6,6 +6,7 @@ import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 function WineShowed() {
   const context = useContext(MaCaveAVinContext);
   const showed = context.WineContext.showed;
+  const { newRef, setNewRef } = context.NewRefContext;
 
   const [quantity, setQuantity] = useState(0);
 
@@ -20,7 +21,28 @@ function WineShowed() {
       setQuantity(quantity);
     } else {
       setQuantity(quantity + delta);
+      changeQuantity(quantity + delta);
     }
+  }
+
+  async function changeQuantity(quantity) {
+    await fetch(`http://localhost:3000/api/wines/${showed._id}`, {
+      method: "PUT",
+      body: JSON.stringify({ quantity }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("There was a problem with the fetch operation:", error);
+      });
+    setNewRef(!newRef);
   }
 
   if (showed) {
@@ -74,6 +96,7 @@ const WineShow = styled.div`
 const WineShowTitle = styled.div`
   display: flex;
   justify-content: space-between;
+  align-items: center;
 `;
 
 const WineOrigin = styled.div`

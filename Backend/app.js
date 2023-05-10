@@ -49,7 +49,7 @@ const data = [
     bestBefore: 2025,
     country: "France",
     tag: "cndp",
-    quantity: 5,
+    quantity: 1,
   },
   {
     name: "Bourgogne Hautes Côtes de Beaune ",
@@ -66,7 +66,7 @@ const data = [
     bestBefore: 2030,
     country: "France",
     tag: "hcdn",
-    quantity: 5,
+    quantity: 6,
   },
   {
     name: "Pi Vell",
@@ -83,7 +83,7 @@ const data = [
     bestBefore: 2025,
     country: "France",
     tag: "pivell",
-    quantity: 5,
+    quantity: 11,
   },
   {
     name: "Riesling Collection Privée",
@@ -100,7 +100,7 @@ const data = [
     bestBefore: 2023,
     country: "France",
     tag: "riesling",
-    quantity: 5,
+    quantity: 3,
   },
   {
     name: "Haut Rian",
@@ -117,7 +117,7 @@ const data = [
     bestBefore: 2022,
     country: "France",
     tag: "haut_rian",
-    quantity: 5,
+    quantity: 8,
   },
   {
     name: "Les Jamelles Chardonnay",
@@ -134,7 +134,7 @@ const data = [
     bestBefore: 2022,
     country: "France",
     tag: "jamelles",
-    quantity: 5,
+    quantity: 4,
   },
   {
     name: "Chianti Riserva",
@@ -152,7 +152,7 @@ const data = [
     bestBefore: 2027,
     country: "Italy",
     tag: "chianti",
-    quantity: 5,
+    quantity: 2,
   },
 ];
 
@@ -194,7 +194,18 @@ app.post("/api/wines", (req, res, next) => {
 });
 
 // Modifie la quantité de la référence mise en évidence
+app.put("/api/wines/:id", (req, res) => {
+  const id = req.params.id;
+  const update = {quantity: req.body.quantity};
 
-
+  Wine.findByIdAndUpdate(id, update, { new: true })
+    .then((updatedWine) => {
+      res.json(updatedWine);
+    })
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "Error updating document" });
+    });
+});
 
 module.exports = app;
