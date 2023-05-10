@@ -2,6 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Color from "../../utils/Color/Color";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function WineShowed() {
   const context = useContext(MaCaveAVinContext);
@@ -72,6 +74,10 @@ function WineShowed() {
           </p>
           <WineShowButton onClick={() => editQuantity(1)}>+</WineShowButton>
         </WineShowButtons>
+        <FontAwesomeIcon
+          icon={faTrash}
+          style={{ color: "#ac1c35" }}
+        />
       </WineShow>
     );
   } else {
