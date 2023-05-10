@@ -1,8 +1,8 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import Footer from './Components/Footer/Footer'
-import Header from './Components/Header/Header'
+import React from "react";
+import ReactDOM from "react-dom/client";
+import App from "./App";
+import Footer from "./Components/Footer/Footer";
+import Header from "./Components/Header/Header";
 
 if (import.meta.hot) {
   import.meta.hot.on(
@@ -12,10 +12,8 @@ if (import.meta.hot) {
   );
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <Header />
     <App />
-    <Footer />
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

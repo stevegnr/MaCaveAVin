@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
 import frenchFlag from "../../assets/flag-france.png";
-import { WineContext } from "../../../Context/WineContext";
+import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import Color from "../Color/Color";
 
 function WineReference({
@@ -21,7 +21,8 @@ function WineReference({
 }) {
   // Remplace la string 'true' ou 'false' par le boolean équivalent
   biologic = biologic === "true";
-  const { setShowed } = useContext(WineContext);
+  const context = useContext(MaCaveAVinContext);
+  const setShowed  = context.WineContext.setShowed;
 
   return (
     <WineRef
@@ -123,4 +124,8 @@ const Quantity = styled.div`
 const Year = styled.div`
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  bottom: 135px;
 `;

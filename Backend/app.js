@@ -37,7 +37,7 @@ const data = [
     region: "Rhône",
     year: 1991,
     color: "red",
-    price: 220,
+    price: 22,
     grapeVariety: {
       Grenache: 50,
       Mourvèdre: 30,

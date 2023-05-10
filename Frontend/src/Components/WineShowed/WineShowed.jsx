@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { WineContext } from "../../../Context/WineContext";
 import Color from "../Color/Color";
+import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 
 function WineShowed() {
-  const { showed } = useContext(WineContext);
+  const context = useContext(MaCaveAVinContext)
+  const showed  = context.WineContext.showed
 
   if (showed) {
     return (

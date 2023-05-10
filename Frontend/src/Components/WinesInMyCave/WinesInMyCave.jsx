@@ -2,18 +2,21 @@ import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import WineReference from "../WineReference/WineReference";
 import WineShowed from "../WineShowed/WineShowed";
-import { WineContext } from "../../../Context/WineContext";
+import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 
 function WinesInMyCave() {
   const [winesList, setWinesList] = useState([]);
   const [isDataLoading, setDataLoading] = useState(false);
 
-  const { showed } = useContext(WineContext);
+  const context = useContext(MaCaveAVinContext);
 
-  const [newRef, setNewRef] = useState(false);
+  const showed = context.WineContext.showed;
+
+  const newRef = context.NewRefContext.newRef;
 
   useEffect(() => {
     async function fetchWine() {
+      console.log('Lancement du fetch');
       setDataLoading(true);
       const response = await fetch("http://localhost:3000/api/wines", {
         method: "GET",
@@ -21,7 +24,6 @@ function WinesInMyCave() {
       const winesList = await response.json();
       setWinesList(winesList);
       setDataLoading(false);
-      setNewRef(false);
     }
     fetchWine();
   }, [newRef]);
@@ -86,5 +88,5 @@ const WinesWindow = styled.div`
 
 const Main = styled.div`
   display: flex;
-  margin-top: 50px;
+  margin: 50px 0;
 `;

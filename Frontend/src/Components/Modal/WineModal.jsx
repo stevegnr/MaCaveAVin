@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
+import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 
 function WineModal({ title, show, onClose }) {
   if (!show) {
@@ -18,6 +19,9 @@ function WineModal({ title, show, onClose }) {
   const [bestBefore, setBestBefore] = useState(year + 1);
   const [bestAfter, setBestAfter] = useState(year + 2);
 
+  const context = useContext(MaCaveAVinContext);
+  const { newRef, setNewRef } = context.NewRefContext;
+
   function onSubmit() {
     const formData = {
       name: name,
@@ -33,7 +37,6 @@ function WineModal({ title, show, onClose }) {
       bestAfter: bestAfter,
     };
     onClose();
-    console.log(formData);
 
     fetch("http://localhost:3000/api/wines", {
       method: "POST",
@@ -54,6 +57,7 @@ function WineModal({ title, show, onClose }) {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
+    setNewRef(!newRef);
   }
 
   return (
