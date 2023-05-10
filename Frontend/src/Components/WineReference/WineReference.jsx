@@ -5,7 +5,7 @@ import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import Color from "../Color/Color";
 
 function WineReference({
-  _id,
+  key,
   name,
   domain,
   region,
@@ -26,10 +26,10 @@ function WineReference({
 
   return (
     <WineRef
-      key={_id}
+      key={key}
       onClick={() =>
         setShowed({
-          _id: _id,
+          _id: key,
           name: name,
           domain: domain,
           region: region,

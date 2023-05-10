@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import styled from "styled-components";
 import Color from "../Color/Color";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
@@ -9,8 +9,9 @@ function WineShowed() {
 
   if (showed) {
     const [quantity, setQuantity] = useState(parseInt(showed.quantity));
-    console.log(showed);
-    console.log(showed._id);
+    useEffect(() => {
+      setQuantity(parseInt(showed.quantity));
+    }, [showed]);
 
     function editQuantity(delta) {
       if (delta === -1 && quantity === 0) {

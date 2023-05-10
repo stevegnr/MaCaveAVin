@@ -16,7 +16,6 @@ function WinesInMyCave() {
 
   useEffect(() => {
     async function fetchWine() {
-      console.log("Lancement du fetch");
       setDataLoading(true);
       const response = await fetch("http://localhost:3000/api/wines", {
         method: "GET",
@@ -27,7 +26,7 @@ function WinesInMyCave() {
     }
     fetchWine();
   }, [newRef]);
-  console.log(winesList);
+
   return (
     <Main>
       <WineShowed showed={showed} />
@@ -54,7 +53,7 @@ function WinesInMyCave() {
               quantity,
             }) => (
               <WineReference
-                _id={_id}
+                key={_id}
                 name={name}
                 domain={domain}
                 region={region}
