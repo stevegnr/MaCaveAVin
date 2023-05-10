@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, memo } from "react";
 import styled from "styled-components";
 import WineReference from "../WineReference/WineReference";
 import WineShowed from "../WineShowed/WineShowed";
@@ -28,6 +28,8 @@ function WinesInMyCave() {
     fetchWine();
   }, [newRef]);
 
+  const MemoizedWineReference = memo(WineReference);
+
   return (
     <Main>
       <WineShowed showed={showed} />
@@ -49,7 +51,7 @@ function WinesInMyCave() {
               tag,
               quantity,
             }) => (
-              <WineReference
+              <MemoizedWineReference
                 key={_id}
                 _id={_id}
                 name={name}
