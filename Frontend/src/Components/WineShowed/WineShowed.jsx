@@ -7,17 +7,23 @@ function WineShowed() {
   const context = useContext(MaCaveAVinContext);
   const showed = context.WineContext.showed;
 
-  if (showed) {
-    const [quantity, setQuantity] = useState(parseInt(showed.quantity));
-    useEffect(() => {
-      setQuantity(parseInt(showed.quantity));
-    }, [showed]);
+  const [quantity, setQuantity] = useState(0);
 
-    function editQuantity(delta) {
-      if (delta === -1 && quantity === 0) {
-        setQuantity(quantity);
-      } else setQuantity(quantity + delta);
+  useEffect(() => {
+    if (showed) {
+      setQuantity(parseInt(showed.quantity));
     }
+  }, [showed]);
+
+  function editQuantity(delta) {
+    if (delta === -1 && quantity === 0) {
+      setQuantity(quantity);
+    } else {
+      setQuantity(quantity + delta);
+    }
+  }
+
+  if (showed) {
     return (
       <WineShow>
         <Color color={showed.color} />
@@ -42,7 +48,7 @@ function WineShowed() {
           <p>
             <b>{quantity}</b> en stock
           </p>
-          <WineShowButton onClick={() => editQuantity(+1)}>+</WineShowButton>
+          <WineShowButton onClick={() => editQuantity(1)}>+</WineShowButton>
         </WineShowButtons>
       </WineShow>
     );
