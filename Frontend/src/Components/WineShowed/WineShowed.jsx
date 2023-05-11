@@ -5,6 +5,7 @@ import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
+
 function WineShowed() {
   const context = useContext(MaCaveAVinContext);
   const { showed, setShowed } = context.WineContext;
@@ -83,22 +84,27 @@ function WineShowed() {
           <p>{showed.region}</p>
         </WineOrigin>
         <p>{showed.country}</p>
-        <p>{showed.price}€</p>
-        <p>{showed.bestAfter}</p>
-        <p>{showed.bestBefore}</p>
+        <WineShowGarde>
+          <p>{showed.bestAfter}</p> - <p>{showed.bestBefore}</p>
+        </WineShowGarde>
         <p>{showed.tag}</p>
-        <WineShowButtons>
-          <WineShowButton onClick={() => editQuantity(-1)}>-</WineShowButton>
-          <p>
-            <b>{quantity}</b> en stock
-          </p>
-          <WineShowButton onClick={() => editQuantity(1)}>+</WineShowButton>
-        </WineShowButtons>
-        <FontAwesomeIcon
-          icon={faTrash}
-          style={{ color: "#ac1c35" }}
-          onClick={() => deleteWine()}
-        />
+        <WineShowMenu>
+        <p>{showed.price}€</p>
+          <WineShowButtons>
+            <WineShowButton onClick={() => editQuantity(-1)}>-</WineShowButton>
+            <p>
+              <b>{quantity}</b> en stock
+            </p>
+            <WineShowButton onClick={() => editQuantity(1)}>+</WineShowButton>
+          </WineShowButtons>
+          <FontAwesomeIcon
+            icon={faTrash}
+            className="beatFadeOnHover"
+            beatFade
+            style={{ color: "#ac1c35" }}
+            onClick={() => deleteWine()}
+          />
+        </WineShowMenu>
       </WineShow>
     );
   } else {
@@ -155,4 +161,14 @@ const WineShowButton = styled.div`
     background-color: white;
     color: #ac1c35;
   }
+`;
+
+const WineShowMenu = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+`;
+
+const WineShowGarde = styled.div`
+  display: flex;
 `;
