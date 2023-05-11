@@ -7,7 +7,7 @@ import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
 function WineShowed() {
   const context = useContext(MaCaveAVinContext);
-  const showed = context.WineContext.showed;
+  const { showed, setShowed } = context.WineContext;
   const { newRef, setNewRef } = context.NewRefContext;
 
   const [quantity, setQuantity] = useState(0);
@@ -47,6 +47,26 @@ function WineShowed() {
     setNewRef(!newRef);
   }
 
+  async function deleteWine() {
+    await fetch(`http://localhost:3000/api/wines/${showed._id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("There was a problem with the delete operation:", error);
+      });
+    setNewRef(!newRef);
+    setShowed(null);
+  }
+
   if (showed) {
     return (
       <WineShow>
@@ -77,6 +97,7 @@ function WineShowed() {
         <FontAwesomeIcon
           icon={faTrash}
           style={{ color: "#ac1c35" }}
+          onClick={() => deleteWine()}
         />
       </WineShow>
     );

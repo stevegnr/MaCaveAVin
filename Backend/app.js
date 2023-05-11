@@ -196,7 +196,7 @@ app.post("/api/wines", (req, res, next) => {
 // Modifie la quantité de la référence mise en évidence
 app.put("/api/wines/:id", (req, res) => {
   const id = req.params.id;
-  const update = {quantity: req.body.quantity};
+  const update = { quantity: req.body.quantity };
 
   Wine.findByIdAndUpdate(id, update, { new: true })
     .then((updatedWine) => {
@@ -205,6 +205,20 @@ app.put("/api/wines/:id", (req, res) => {
     .catch((err) => {
       console.error(err);
       res.status(500).json({ error: "Error updating document" });
+    });
+});
+
+// Supprime une référence
+app.delete("/api/wines/:id", (req, res) => {
+  const id = req.params.id;
+  Wine.findByIdAndDelete(id)
+    .then((deleteWine) => {
+      res.json(deleteWine);
+    })
+    .then(() => console.log("Référence supprimée !"))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).json({ error: "Error deleting document" });
     });
 });
 
