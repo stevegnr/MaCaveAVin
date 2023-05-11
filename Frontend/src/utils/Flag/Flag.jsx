@@ -92,7 +92,6 @@ function Flag({ country }) {
       flagSrc = "other";
       break;
     }
-    console.log({flagSrc: flagSrc, country: country});
   if (country === "other") {
     return (
       <FontAwesomeIcon

@@ -1,9 +1,14 @@
+require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const fs = require("fs");
 
+const loginMongoDB = process.env.LOGIN_MONGODB;
+const mdpMongoDB = process.env.MDP_MONGODB
 mongoose
   .connect(
-    "mongodb+srv://stevegarnerisg:Sgarneri251091@macaveavin.eyjfrol.mongodb.net/MaCaveAVin",
+    `mongodb+srv://${loginMongoDB}:${mdpMongoDB}@macaveavin.eyjfrol.mongodb.net/MaCaveAVin`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
@@ -14,6 +19,21 @@ const app = express();
 const Wine = require("./models/wine");
 
 app.use(express.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+const path = "../Frontend/src/assets/tags";
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, res, cb) {
+    cb(null, path);
+  },
+  filename: function (req, file, cb) {
+    const nameOfFile = new Date().toDateString() + file.originalname;
+    cb(null, nameOfFile);
+  },
+});
+
+const upload = multer({ storage: storage });
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -170,7 +190,12 @@ app.get("/api/wines", (req, res, next) => {
 });
 
 // Crée une nouvelle référence
-app.post("/api/wines", (req, res, next) => {
+app.post("/api/wines", upload.single("tag"), (req, res, next) => {
+  const fichier = req.file;
+  fs.writeFile(path + nameOfFile, fichier.buffer, (err) => {
+    if (err) throw err;
+    console.log("Fichier enregistré");
+  });
   const wine = new Wine({
     name: req.body.name,
     domain: req.body.domain,
@@ -183,7 +208,7 @@ app.post("/api/wines", (req, res, next) => {
     bestAfter: req.body.bestAfter,
     bestBefore: req.body.bestBefore,
     country: req.body.country,
-    tag: req.body.tag,
+    tag: this.path + this.nameOfFile,
     quantity: req.body.quantity,
   });
 

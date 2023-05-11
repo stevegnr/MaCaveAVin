@@ -23,6 +23,20 @@ function WineModal({ title, show, onClose }) {
   const { newRef, setNewRef } = context.NewRefContext;
 
   async function onSubmit() {
+/*     const tagData = new FormData();
+    const fileInput = document.querySelector('input[type="file]')
+    formData.append("image", fileInput.files[0])
+
+    const reader = new FileReader()
+    reader.onload = async () => {
+      const base64String = reader.result
+      try {
+        await fetch()
+      } catch (error) {
+        
+      }
+    } */
+
     const formData = {
       name: name,
       year: year,
@@ -35,7 +49,7 @@ function WineModal({ title, show, onClose }) {
       biologic: biologic,
       bestBefore: bestBefore,
       bestAfter: bestAfter,
-      // tag: tag,
+      tag: tag,
     };
     onClose();
 
@@ -133,14 +147,14 @@ function WineModal({ title, show, onClose }) {
                   />
                 </label>
               </ModalDiv>
-             {/*  <ModalDiv>
+              <ModalDiv>
                 <input
                   type="file"
                   name="tag"
                   id="tag"
                   accept="image/*"
                 />
-              </ModalDiv> */}
+              </ModalDiv>
             </fieldset>
             <fieldset>
               <legend>Origine</legend>
