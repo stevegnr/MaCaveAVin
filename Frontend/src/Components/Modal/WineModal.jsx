@@ -35,6 +35,7 @@ function WineModal({ title, show, onClose }) {
       biologic: biologic,
       bestBefore: bestBefore,
       bestAfter: bestAfter,
+      // tag: tag,
     };
     onClose();
 
@@ -132,6 +133,14 @@ function WineModal({ title, show, onClose }) {
                   />
                 </label>
               </ModalDiv>
+             {/*  <ModalDiv>
+                <input
+                  type="file"
+                  name="tag"
+                  id="tag"
+                  accept="image/*"
+                />
+              </ModalDiv> */}
             </fieldset>
             <fieldset>
               <legend>Origine</legend>

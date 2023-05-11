@@ -48,7 +48,7 @@ const data = [
     bestAfter: 2020,
     bestBefore: 2025,
     country: "france",
-    tag: "cndp",
+    tag: "chateauneuf_du_pape.jpg",
     quantity: 1,
   },
   {
@@ -65,7 +65,7 @@ const data = [
     bestAfter: 2025,
     bestBefore: 2030,
     country: "france",
-    tag: "hcdn",
+    tag: "hautes_cotes_de_nuit.jpg",
     quantity: 6,
   },
   {
@@ -82,7 +82,7 @@ const data = [
     bestAfter: 2022,
     bestBefore: 2025,
     country: "france",
-    tag: "pivell",
+    tag: "pi-vell.jpg",
     quantity: 11,
   },
   {
@@ -99,7 +99,7 @@ const data = [
     bestAfter: 2021,
     bestBefore: 2023,
     country: "france",
-    tag: "riesling",
+    tag: "riesling.jpg",
     quantity: 3,
   },
   {
@@ -116,7 +116,7 @@ const data = [
     bestAfter: 2020,
     bestBefore: 2022,
     country: "france",
-    tag: "haut_rian",
+    tag: "haut_rian.jpg",
     quantity: 8,
   },
   {
@@ -133,7 +133,7 @@ const data = [
     bestAfter: 2021,
     bestBefore: 2022,
     country: "france",
-    tag: "jamelles",
+    tag: "les_jamelles.jpg",
     quantity: 4,
   },
   {
@@ -151,7 +151,7 @@ const data = [
     bestAfter: 2022,
     bestBefore: 2027,
     country: "italy",
-    tag: "chianti",
+    tag: "chianti.jpg",
     quantity: 2,
   },
 ];

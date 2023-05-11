@@ -3,13 +3,16 @@ import styled from "styled-components";
 import Color from "../../utils/Color/Color";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash } from "@fortawesome/free-solid-svg-icons";
-
+import { faTrash, faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
+import Flag from "../../utils/Flag/Flag";
+import Tag from "../../utils/Tag/Tag";
 
 function WineShowed() {
   const context = useContext(MaCaveAVinContext);
   const { showed, setShowed } = context.WineContext;
   const { newRef, setNewRef } = context.NewRefContext;
+
+  const [hover, setHover] = useState(false)
 
   const [quantity, setQuantity] = useState(0);
 
@@ -73,23 +76,29 @@ function WineShowed() {
       <WineShow>
         <Color color={showed.color} />
         <WineShowTitle>
-          <h2>
-            {showed.name}
-            {showed.biologic && "🍀"}
-          </h2>
-          <h2>{showed.year}</h2>
+          {showed.name}
+          {showed.biologic && "🍀"}
         </WineShowTitle>
         <WineOrigin>
           <p>{showed.domain}</p>
           <p>{showed.region}</p>
         </WineOrigin>
-        <p>{showed.country}</p>
-        <WineShowGarde>
-          <p>{showed.bestAfter}</p> - <p>{showed.bestBefore}</p>
-        </WineShowGarde>
-        <p>{showed.tag}</p>
+        <Tag tag={showed.tag} />
+        <Flag country={showed.country}/>
+        <WineShowYearAndGarde>
+          <h2>{showed.year}</h2>
+          <WineShowGarde>
+            <FontAwesomeIcon
+              icon={faCalendarCheck}
+              size="xl"
+              style={{ color: "#ac1c35" }}
+            />
+            <p>{showed.bestAfter}</p> - <p>{showed.bestBefore}</p>
+          </WineShowGarde>
+        </WineShowYearAndGarde>
+
         <WineShowMenu>
-        <p>{showed.price}€</p>
+          <p>{showed.price}€</p>
           <WineShowButtons>
             <WineShowButton onClick={() => editQuantity(-1)}>-</WineShowButton>
             <p>
@@ -99,10 +108,12 @@ function WineShowed() {
           </WineShowButtons>
           <FontAwesomeIcon
             icon={faTrash}
-            className="beatFadeOnHover"
-            beatFade
+            beatFade={hover}
+            size="lg"
             style={{ color: "#ac1c35" }}
             onClick={() => deleteWine()}
+            onMouseOver={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
           />
         </WineShowMenu>
       </WineShow>
@@ -118,6 +129,7 @@ const WineShow = styled.div`
   width: 21%;
   margin: 10px;
   border: 1px solid black;
+  border-radius: 5px;
   padding: 5px;
   position: fixed;
   height: 80%;
@@ -126,10 +138,8 @@ const WineShow = styled.div`
   top: 50px;
 `;
 
-const WineShowTitle = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const WineShowTitle = styled.h2`
+  text-align: center;
 `;
 
 const WineOrigin = styled.div`
@@ -167,8 +177,20 @@ const WineShowMenu = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: absolute;
+  bottom: 0;
+  left: 10px;
+  right: 10px;
 `;
 
 const WineShowGarde = styled.div`
   display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+`;
+
+const WineShowYearAndGarde = styled.div`
+  display: flex;
+  justify-content: space-between;
 `;

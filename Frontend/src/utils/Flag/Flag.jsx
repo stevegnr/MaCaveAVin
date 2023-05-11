@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faQuestion } from "@fortawesome/free-solid-svg-icons";
 
 import spain from "./flags/flag-spain.png";
 import italy from "./flags/flag-italy.png";
@@ -23,7 +25,7 @@ import moldova from "./flags/flag-moldova.png";
 import brasil from "./flags/flag-brasil.png";
 
 function Flag({ country }) {
-  let flagSrc = france;
+  let flagSrc;
 
   switch (country) {
     case "spain":
@@ -87,16 +89,25 @@ function Flag({ country }) {
       flagSrc = brasil;
       break;
     default:
-      flagSrc = france;
+      flagSrc = "other";
       break;
-  }
-
-  return (
-    <StyledFlag
-      src={flagSrc}
-      alt={country}
-    />
-  );
+    }
+    console.log({flagSrc: flagSrc, country: country});
+  if (country === "other") {
+    return (
+      <FontAwesomeIcon
+        icon={faQuestion}
+        flip
+        size="lg"
+      />
+    );
+  } else
+    return (
+      <StyledFlag
+        src={flagSrc}
+        alt={country}
+      />
+    );
 }
 
 export default Flag;

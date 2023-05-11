@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import Color from "../../utils/Color/Color";
 import Flag from "../../utils/Flag/Flag";
+import Tag from "../../utils/Tag/Tag";
 
 function WineReference({
   _id,
@@ -24,6 +25,7 @@ function WineReference({
   const context = useContext(MaCaveAVinContext);
   const setShowed = context.WineContext.setShowed;
 
+  let newTag = "../../src/assets/tags/" + tag;
   return (
     <WineRef
       onClick={() =>
@@ -39,7 +41,7 @@ function WineReference({
           bestAfter: bestAfter,
           bestBefore: bestBefore,
           country: country,
-          tag: tag,
+          tag: newTag,
           quantity: quantity,
         })
       }>
@@ -58,8 +60,7 @@ function WineReference({
           {bestAfter} - {bestBefore}
         </p>
       </Year>
-
-      <Etiquette src={tag} />
+      <Tag tag={newTag} />
 
       <PriceAndFlag>
         <Flag country={country} />
@@ -79,6 +80,7 @@ const WineRef = styled.div`
   background-color: #cababa;
   padding: 5px;
   position: relative;
+  border-radius: 5px;
   :hover {
     background-color: lightgray;
   }
@@ -90,18 +92,9 @@ const PriceAndFlag = styled.div`
   justify-content: space-between;
   align-items: center;
   position: absolute;
-  bottom: 0;
-`;
-
-const Etiquette = styled.img`
-  width: 90%;
-  height: 35%;
-  border-radius: 5px;
-  left: 50%;
-  bottom: 40px;
-  transform: translate(-50%);
-  position: absolute;
-  border: 1px solid black;
+  bottom: 5px;
+  left: 10px;
+  right: 10px;
 `;
 
 const Quantity = styled.div`
