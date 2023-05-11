@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import frenchFlag from "../../assets/flag-france.png";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import Color from "../../utils/Color/Color";
+import Flag from "../../utils/Flag/Flag";
 
 function WineReference({
   _id,
@@ -62,7 +62,7 @@ function WineReference({
       <Etiquette src={tag} />
 
       <PriceAndFlag>
-        <div>{country === "France" && <Flag src={frenchFlag} />}</div>
+        <Flag country={country} />
         <div>{price}€</div>
         <Quantity>x{quantity}</Quantity>
       </PriceAndFlag>
@@ -82,10 +82,6 @@ const WineRef = styled.div`
   :hover {
     background-color: lightgray;
   }
-`;
-
-const Flag = styled.img`
-  height: 30px;
 `;
 
 const PriceAndFlag = styled.div`
