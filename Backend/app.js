@@ -6,9 +6,10 @@ const fs = require("fs");
 
 const loginMongoDB = process.env.LOGIN_MONGODB;
 const mdpMongoDB = process.env.MDP_MONGODB
+const mongo = process.env.MONGO
 mongoose
   .connect(
-    `mongodb+srv://${loginMongoDB}:${mdpMongoDB}@macaveavin.eyjfrol.mongodb.net/MaCaveAVin`,
+    `mongodb+srv://${loginMongoDB}:${mdpMongoDB}@${mongo}`,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
   .then(() => console.log("Connexion à MongoDB réussie !"))
