@@ -160,7 +160,7 @@ const data = [
   {
     name: "Chianti Riserva",
     domain: "Uggiano",
-    region: "Italy",
+    region: "Chianti - Toscane",
     year: 2019,
     color: "red",
     price: 9.35,
@@ -174,6 +174,24 @@ const data = [
     country: "italy",
     tag: "chianti.jpg",
     quantity: 2,
+  },
+  {
+    name: "El Coto",
+    domain: "Crianza",
+    region: "La Rioja",
+    year: 2016,
+    color: "red",
+    price: 8.5,
+    grapeVariety: {
+      Sangiovese: 50,
+      Canailo: 50,
+    },
+    biologic: true,
+    bestAfter: 2022,
+    bestBefore: 2027,
+    country: "spain",
+    tag: "el-coto.jpg",
+    quantity: 7,
   },
 ];
 

@@ -74,7 +74,6 @@ function WineReference({
 export default WineReference;
 
 const WineRef = styled.div`
-  border: 1px solid black;
   width: 200px;
   height: 250px;
   background-color: #cababa;

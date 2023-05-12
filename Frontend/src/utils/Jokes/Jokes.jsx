@@ -21,8 +21,8 @@ function Jokes() {
     "L'alcool ne résoud pas les problèmes. Ceci dit, l'eau et le lait non plus 🍼"
   ];
 
-  let min = 1;
-  let max = jokes.length - 1;
+  let min = 0;
+  let max = jokes.length;
 
   return <p>{jokes[Math.floor(Math.random() * (max - min) + min)]}</p>;
 }

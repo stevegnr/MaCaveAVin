@@ -36,7 +36,6 @@ const InsertedFlag = styled.div`
 `;
 
 const TagAndFlag = styled.div`
-  background-color: blue;
   width: 90%;
   height: 35%;
   border-radius: 5px;
