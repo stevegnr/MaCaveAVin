@@ -91,7 +91,7 @@ function Flag({ country }) {
     default:
       flagSrc = "other";
       break;
-    }
+  }
   if (country === "other") {
     return (
       <FontAwesomeIcon
@@ -102,17 +102,12 @@ function Flag({ country }) {
     );
   } else
     return (
-      <StyledFlag
+      <img
         src={flagSrc}
         alt={country}
+        style={{ height: "30px", width: "30px", borderRadius: '50%' }}
       />
     );
 }
 
 export default Flag;
-
-const StyledFlag = styled.img`
-  height: 30px;
-  width: 30px;
-  border-radius: 50%;
-`;

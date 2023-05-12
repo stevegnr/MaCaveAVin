@@ -2,11 +2,15 @@ import React from "react";
 import styled from "styled-components";
 import Flag from "../Flag/Flag";
 
-function Tag({ tag, country }) {
+function Tag({ tag, country, height, width }) {
   return (
     <TagAndFlag>
-        {country && <InsertedFlag country={country} />}
-        <Etiquette src={tag} />
+      {country && (
+        <InsertedFlag>
+          <Flag country={country} />
+        </InsertedFlag>
+      )}
+      <Etiquette src={tag} />
     </TagAndFlag>
   );
 }
@@ -21,11 +25,14 @@ const Etiquette = styled.img`
   z-index: -1;
 `;
 
-const InsertedFlag = styled(Flag)`
-  position: relative;
-  top: 0;
-  left: 30px;
+const InsertedFlag = styled.div`
+  position: absolute;
+  top: 15px;
+  left: 15px;
   z-index: 3;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
 `;
 
 const TagAndFlag = styled.div`
@@ -38,5 +45,4 @@ const TagAndFlag = styled.div`
   transform: translate(-50%);
   position: absolute;
   border: 1px solid black;
-
 `;
