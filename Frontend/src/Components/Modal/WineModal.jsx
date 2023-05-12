@@ -23,7 +23,7 @@ function WineModal({ title, show, onClose }) {
   const { newRef, setNewRef } = context.NewRefContext;
 
   async function onSubmit() {
-/*     const tagData = new FormData();
+    /*     const tagData = new FormData();
     const fileInput = document.querySelector('input[type="file]')
     formData.append("image", fileInput.files[0])
 
@@ -73,7 +73,7 @@ function WineModal({ title, show, onClose }) {
   }
 
   return (
-    <ModalOverlay onClick={onClose}>
+    <ModalOverlay onClick={onClose} >
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
           <ModalTitle>
@@ -91,7 +91,7 @@ function WineModal({ title, show, onClose }) {
                     value={name}
                     type="text"
                     name="name"
-                    _id="name"
+                    id="name"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </label>
@@ -113,7 +113,7 @@ function WineModal({ title, show, onClose }) {
                   Couleur :
                   <select
                     name="color"
-                    _id="color"
+                    id="color"
                     onChange={(e) => setColor(e.target.value)}
                     defaultValue={color}>
                     <option value="red">Rouge</option>
@@ -130,7 +130,7 @@ function WineModal({ title, show, onClose }) {
                     defaultValue={quantity}
                     step={1}
                     name="quantity"
-                    _id="quantity"
+                    id="quantity"
                     onChange={(e) => setQuantity(e.target.value)}
                   />
                 </label>
@@ -139,7 +139,7 @@ function WineModal({ title, show, onClose }) {
                   <input
                     type="number"
                     name="price"
-                    _id="price"
+                    id="price"
                     min="0"
                     step="0.01"
                     defaultValue={price}
@@ -164,7 +164,7 @@ function WineModal({ title, show, onClose }) {
                   <input
                     type="text"
                     name="domain"
-                    _id="domain"
+                    id="domain"
                     onChange={(e) => setDomain(e.target.value)}
                     defaultValue={domain}
                   />
@@ -183,13 +183,33 @@ function WineModal({ title, show, onClose }) {
               <ModalDiv>
                 <label htmlFor="country">
                   Pays :
-                  <input
-                    type="text"
+                  <select
                     name="country"
-                    _id="country"
+                    id="country"
                     onChange={(e) => setCountry(e.target.value)}
-                    defaultValue={country}
-                  />
+                    defaultValue={'france'}>
+                    <option value="">Sélectionner un pays</option>
+                    <option value="southAfrica">Afrique du Sud</option>
+                    <option value="germany">Allemagne</option>
+                    <option value="argentina">Argentine</option>
+                    <option value="australia">Australie</option>
+                    <option value="austria">Autriche</option>
+                    <option value="brasil">Brésil</option>
+                    <option value="china">Chine</option>
+                    <option value="chile">Chili</option>
+                    <option value="spain">Espagne</option>
+                    <option value="usa">États-Unis</option>
+                    <option default value="france">France</option>
+                    <option value="greece">Grèce</option>
+                    <option value="hungary">Hongrie</option>
+                    <option value="italy">Italie</option>
+                    <option value="moldova">Moldavie</option>
+                    <option value="newZealand">Nouvelle-Zélande</option>
+                    <option value="portugal">Portugal</option>
+                    <option value="romania">Roumanie</option>
+                    <option value="russia">Russie</option>
+                    <option value="switzerland">Suisse</option>
+                  </select>
                 </label>
                 <label htmlFor="biologic">
                   Bio ?
@@ -198,7 +218,7 @@ function WineModal({ title, show, onClose }) {
                     <input
                       type="radio"
                       name="bio"
-                      _id="bio"
+                      id="bio"
                       onChange={(e) => setBiologic(true)}
                     />
                   </label>
@@ -207,7 +227,7 @@ function WineModal({ title, show, onClose }) {
                     <input
                       type="radio"
                       name="bio"
-                      _id="notbio"
+                      id="notbio"
                       defaultChecked
                       onChange={(e) => setBiologic(false)}
                     />
@@ -226,7 +246,7 @@ function WineModal({ title, show, onClose }) {
                   min={0}
                   step={1}
                   name="bestAfter"
-                  _id="bestAfter"
+                  id="bestAfter"
                   onChange={(e) => setBestBefore(e.target.value)}
                   defaultValue={+year + 1}
                 />
@@ -240,7 +260,7 @@ function WineModal({ title, show, onClose }) {
                   min={0}
                   step={1}
                   name="bestBefore"
-                  _id="bestBefore"
+                  id="bestBefore"
                   onChange={(e) => setBestAfter(e.target.value)}
                   defaultValue={+year + 2}
                 />
