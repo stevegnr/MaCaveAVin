@@ -1,8 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import Jokes from "../../utils/Jokes/Jokes";
 
 function Footer() {
-  return <Foot>Parce que c'est parfois dur de s'y retrouver ! 🍷</Foot>;
+  return <Foot><Jokes/></Foot>;
 }
 
 export default Footer;

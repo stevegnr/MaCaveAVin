@@ -12,7 +12,7 @@ function WineShowed() {
   const { showed, setShowed } = context.WineContext;
   const { newRef, setNewRef } = context.NewRefContext;
 
-  const [hover, setHover] = useState(false)
+  const [hover, setHover] = useState(false);
 
   const [quantity, setQuantity] = useState(0);
 
@@ -83,8 +83,7 @@ function WineShowed() {
           <p>{showed.domain}</p>
           <p>{showed.region}</p>
         </WineOrigin>
-        <Tag tag={showed.tag} />
-        <Flag country={showed.country}/>
+          <Tag tag={showed.tag} country={showed.country} />
         <WineShowYearAndGarde>
           <h2>{showed.year}</h2>
           <WineShowGarde>
