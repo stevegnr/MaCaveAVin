@@ -33,7 +33,7 @@ This personal project is a training exercise and is not finished. It answers a t
 # Tasks
 - Create the server and app and database ✅
 - Create the template for the wine references ✅
-- Seeder the test set ✅
+- Seed the test set ✅
 - Create route to retrieve all references and display them ✅
 - Create route to add a new reference ✅
 - Create the route to modify the quantities of a reference ✅
