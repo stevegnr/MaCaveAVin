@@ -25,7 +25,9 @@ function WineReference({
   const context = useContext(MaCaveAVinContext);
   const setShowed = context.WineContext.setShowed;
 
-  let newTag = "../../src/assets/tags/" + tag;
+  let newTag = "http://www.localhost:3000/" + tag;
+
+  console.log(newTag);
   return (
     <WineRef
       onClick={() =>

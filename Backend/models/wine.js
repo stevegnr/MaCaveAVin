@@ -7,7 +7,6 @@ const wineSchema = mongoose.Schema({
   year: { type: Number },
   color: { type: String, required: true },
   price: { type: Number },
-  grapeVariety: { type: Array },
   biologic: { type: String },
   bestAfter: { type: Number, default: null },
   bestBefore: { type: Number, default: null },

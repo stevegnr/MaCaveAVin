@@ -18,47 +18,31 @@ function WineModal({ title, show, onClose }) {
   const [biologic, setBiologic] = useState(false);
   const [bestBefore, setBestBefore] = useState(year + 1);
   const [bestAfter, setBestAfter] = useState(year + 2);
+  const [image, setImage] = useState(null);
 
   const context = useContext(MaCaveAVinContext);
   const { newRef, setNewRef } = context.NewRefContext;
+  console.log(image);
 
   async function onSubmit() {
-    /*     const tagData = new FormData();
-    const fileInput = document.querySelector('input[type="file]')
-    formData.append("image", fileInput.files[0])
-
-    const reader = new FileReader()
-    reader.onload = async () => {
-      const base64String = reader.result
-      try {
-        await fetch()
-      } catch (error) {
-        
-      }
-    } */
-
-    const formData = {
-      name: name,
-      year: year,
-      color: color,
-      quantity: quantity,
-      price: price,
-      domain: domain,
-      region: region,
-      country: country,
-      biologic: biologic,
-      bestBefore: bestBefore,
-      bestAfter: bestAfter,
-      // tag: tag,
-    };
+    const formData = new FormData();
+    formData.append("name", name);
+    formData.append("year", year);
+    formData.append("color", color);
+    formData.append("quantity", quantity);
+    formData.append("price", price);
+    formData.append("domain", domain);
+    formData.append("region", region);
+    formData.append("country", country);
+    formData.append("biologic", biologic);
+    formData.append("bestBefore", bestBefore);
+    formData.append("bestAfter", bestAfter);
+    formData.append("tag", image);
     onClose();
 
     await fetch("http://localhost:3000/api/wines", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
+      body: formData,
     })
       .then((response) => {
         if (!response.ok) {
@@ -69,11 +53,13 @@ function WineModal({ title, show, onClose }) {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
+
+    await fetch;
     setNewRef(!newRef);
   }
 
   return (
-    <ModalOverlay onClick={onClose} >
+    <ModalOverlay onClick={onClose}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
           <ModalTitle>
@@ -147,14 +133,15 @@ function WineModal({ title, show, onClose }) {
                   />
                 </label>
               </ModalDiv>
-              {/* <ModalDiv>
+              <ModalDiv>
                 <input
                   type="file"
                   name="tag"
                   id="tag"
                   accept="image/*"
+                  onChange={(e) => setImage(e.target.files[0])}
                 />
-              </ModalDiv> */}
+              </ModalDiv>
             </fieldset>
             <fieldset>
               <legend>Origine</legend>
@@ -187,7 +174,7 @@ function WineModal({ title, show, onClose }) {
                     name="country"
                     id="country"
                     onChange={(e) => setCountry(e.target.value)}
-                    defaultValue={'france'}>
+                    defaultValue={"france"}>
                     <option value="">Sélectionner un pays</option>
                     <option value="southAfrica">Afrique du Sud</option>
                     <option value="germany">Allemagne</option>
@@ -199,7 +186,11 @@ function WineModal({ title, show, onClose }) {
                     <option value="chile">Chili</option>
                     <option value="spain">Espagne</option>
                     <option value="usa">États-Unis</option>
-                    <option default value="france">France</option>
+                    <option
+                      default
+                      value="france">
+                      France
+                    </option>
                     <option value="greece">Grèce</option>
                     <option value="hungary">Hongrie</option>
                     <option value="italy">Italie</option>

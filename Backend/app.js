@@ -2,16 +2,15 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
-const fs = require("fs");
 
 const loginMongoDB = process.env.LOGIN_MONGODB;
-const mdpMongoDB = process.env.MDP_MONGODB
-const mongo = process.env.MONGO
+const mdpMongoDB = process.env.MDP_MONGODB;
+const mongo = process.env.MONGO;
 mongoose
-  .connect(
-    `mongodb+srv://${loginMongoDB}:${mdpMongoDB}@${mongo}`,
-    { useNewUrlParser: true, useUnifiedTopology: true }
-  )
+  .connect(`mongodb+srv://${loginMongoDB}:${mdpMongoDB}@${mongo}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  })
   .then(() => console.log("Connexion à MongoDB réussie !"))
   .catch(() => console.log("Connexion à MongoDB échouée !"));
 
@@ -20,16 +19,18 @@ const app = express();
 const Wine = require("./models/wine");
 
 app.use(express.json());
+app.use(express.static("public/img/tags"));
+
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const path = "../Frontend/src/assets/tags";
+const path = "./public/img/tags";
 const multer = require("multer");
 const storage = multer.diskStorage({
   destination: function (req, res, cb) {
     cb(null, path);
   },
   filename: function (req, file, cb) {
-    const nameOfFile = new Date().toDateString() + file.originalname;
+    const nameOfFile = Date.now() + "-" + file.originalname;
     cb(null, nameOfFile);
   },
 });
@@ -59,12 +60,6 @@ const data = [
     year: 1991,
     color: "red",
     price: 22,
-    grapeVariety: {
-      Grenache: 50,
-      Mourvèdre: 30,
-      Syrah: 15,
-      Cinsault: 5,
-    },
     biologic: false,
     bestAfter: 2020,
     bestBefore: 2025,
@@ -96,9 +91,6 @@ const data = [
     year: 2021,
     color: "white",
     price: 46,
-    grapeVariety: {
-      Macabeu: 100,
-    },
     biologic: true,
     bestAfter: 2022,
     bestBefore: 2025,
@@ -113,9 +105,6 @@ const data = [
     year: 2021,
     color: "white",
     price: 7.25,
-    grapeVariety: {
-      Riesling: 100,
-    },
     biologic: false,
     bestAfter: 2021,
     bestBefore: 2023,
@@ -130,9 +119,6 @@ const data = [
     year: 2022,
     color: "pink",
     price: 5.8,
-    grapeVariety: {
-      Merlot: 100,
-    },
     biologic: false,
     bestAfter: 2020,
     bestBefore: 2022,
@@ -147,9 +133,6 @@ const data = [
     year: 2021,
     color: "white",
     price: 7.4,
-    grapeVariety: {
-      Chardonnay: 100,
-    },
     biologic: false,
     bestAfter: 2021,
     bestBefore: 2022,
@@ -164,10 +147,6 @@ const data = [
     year: 2019,
     color: "red",
     price: 9.35,
-    grapeVariety: {
-      Sangiovese: 50,
-      Canailo: 50,
-    },
     biologic: true,
     bestAfter: 2022,
     bestBefore: 2027,
@@ -182,10 +161,6 @@ const data = [
     year: 2016,
     color: "red",
     price: 8.5,
-    grapeVariety: {
-      Sangiovese: 50,
-      Canailo: 50,
-    },
     biologic: true,
     bestAfter: 2022,
     bestBefore: 2027,
@@ -210,11 +185,7 @@ app.get("/api/wines", (req, res, next) => {
 
 // Crée une nouvelle référence
 app.post("/api/wines", upload.single("tag"), (req, res, next) => {
-  const fichier = req.file;
-  fs.writeFile(path + nameOfFile, fichier.buffer, (err) => {
-    if (err) throw err;
-    console.log("Fichier enregistré");
-  });
+  console.log(req.file);
   const wine = new Wine({
     name: req.body.name,
     domain: req.body.domain,
@@ -227,7 +198,7 @@ app.post("/api/wines", upload.single("tag"), (req, res, next) => {
     bestAfter: req.body.bestAfter,
     bestBefore: req.body.bestBefore,
     country: req.body.country,
-    tag: this.path + this.nameOfFile,
+    tag: req.file.filename,
     quantity: req.body.quantity,
   });
 

@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
-import Jokes from "../../utils/Jokes/Jokes";
+import JokesAndQuotes from "../../utils/JokesAndQuotes/JokesAndQuotes";
 
 function Footer() {
-  return <Foot><Jokes/></Foot>;
+  return <Foot><JokesAndQuotes/></Foot>;
 }
 
 export default Footer;
