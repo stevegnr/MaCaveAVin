@@ -3,8 +3,11 @@ import styled from "styled-components";
 import Color from "../../utils/Color/Color";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrash, faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
-import Flag from "../../utils/Flag/Flag";
+import {
+  faTrash,
+  faCalendarCheck,
+  faArrowRightLong,
+} from "@fortawesome/free-solid-svg-icons";
 import Tag from "../../utils/Tag/Tag";
 
 function WineShowed() {
@@ -83,7 +86,10 @@ function WineShowed() {
           <p>{showed.domain}</p>
           <p>{showed.region}</p>
         </WineOrigin>
-          <Tag tag={showed.tag} country={showed.country} />
+        <Tag
+          tag={showed.tag}
+          country={showed.country}
+        />
         <WineShowYearAndGarde>
           <h2>{showed.year}</h2>
           <WineShowGarde>
@@ -92,7 +98,12 @@ function WineShowed() {
               size="xl"
               style={{ color: "#ac1c35" }}
             />
-            <p>{showed.bestAfter}</p> - <p>{showed.bestBefore}</p>
+            <p>{showed.bestAfter}</p>{" "}
+            <FontAwesomeIcon
+              icon={faArrowRightLong}
+              style={{ color: "#ac1c35" }}
+            />{" "}
+            <p>{showed.bestBefore}</p>
           </WineShowGarde>
         </WineShowYearAndGarde>
 
