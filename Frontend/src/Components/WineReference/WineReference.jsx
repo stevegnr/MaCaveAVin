@@ -27,7 +27,6 @@ function WineReference({
 
   let newTag = "http://www.localhost:3000/" + tag;
 
-  console.log(newTag);
   return (
     <WineRef
       onClick={() =>

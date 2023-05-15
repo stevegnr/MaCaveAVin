@@ -14,7 +14,7 @@ function WineModal({ title, show, onClose }) {
   const [price, setPrice] = useState(0);
   const [domain, setDomain] = useState("");
   const [region, setRegion] = useState("");
-  const [country, setCountry] = useState("France");
+  const [country, setCountry] = useState("france");
   const [biologic, setBiologic] = useState(false);
   const [bestBefore, setBestBefore] = useState(year + 1);
   const [bestAfter, setBestAfter] = useState(year + 2);
@@ -22,7 +22,6 @@ function WineModal({ title, show, onClose }) {
 
   const context = useContext(MaCaveAVinContext);
   const { newRef, setNewRef } = context.NewRefContext;
-  console.log(image);
 
   async function onSubmit() {
     const formData = new FormData();
@@ -39,6 +38,7 @@ function WineModal({ title, show, onClose }) {
     formData.append("bestAfter", bestAfter);
     formData.append("tag", image);
     onClose();
+    console.log(formData.country);
 
     await fetch("http://localhost:3000/api/wines", {
       method: "POST",
@@ -53,8 +53,6 @@ function WineModal({ title, show, onClose }) {
       .catch((error) => {
         console.error("There was a problem with the fetch operation:", error);
       });
-
-    await fetch;
     setNewRef(!newRef);
   }
 
@@ -186,11 +184,7 @@ function WineModal({ title, show, onClose }) {
                     <option value="chile">Chili</option>
                     <option value="spain">Espagne</option>
                     <option value="usa">États-Unis</option>
-                    <option
-                      default
-                      value="france">
-                      France
-                    </option>
+                    <option value="france">France</option>
                     <option value="greece">Grèce</option>
                     <option value="hungary">Hongrie</option>
                     <option value="italy">Italie</option>

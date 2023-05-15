@@ -92,7 +92,7 @@ function Flag({ country }) {
       flagSrc = "other";
       break;
   }
-  if (country === "other") {
+  if (flagSrc === "other") {
     return (
       <FontAwesomeIcon
         icon={faQuestion}

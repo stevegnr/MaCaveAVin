@@ -10,7 +10,7 @@ const wineSchema = mongoose.Schema({
   biologic: { type: String },
   bestAfter: { type: Number, default: null },
   bestBefore: { type: Number, default: null },
-  country: { type: String, default: "France" },
+  country: { type: String },
   tag: { type: String },
   quantity: { type: Number, required: true, default: 1 },
 });

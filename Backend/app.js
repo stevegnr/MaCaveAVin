@@ -185,7 +185,6 @@ app.get("/api/wines", (req, res, next) => {
 
 // Crée une nouvelle référence
 app.post("/api/wines", upload.single("tag"), (req, res, next) => {
-  console.log(req.file);
   const wine = new Wine({
     name: req.body.name,
     domain: req.body.domain,
