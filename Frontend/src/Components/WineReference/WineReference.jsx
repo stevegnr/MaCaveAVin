@@ -23,14 +23,14 @@ function WineReference({
   // Remplace la string 'true' ou 'false' par le boolean équivalent
   biologic = biologic === "true";
   const context = useContext(MaCaveAVinContext);
-  const setShowed = context.WineContext.setShowed;
+  const setWineShowed = context.WineContext.setWineShowed;
 
   let newTag = "http://www.localhost:3000/" + tag;
 
   return (
     <WineRef
       onClick={() =>
-        setShowed({
+        setWineShowed({
           _id: _id,
           name: name,
           domain: domain,

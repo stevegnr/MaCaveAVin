@@ -236,4 +236,28 @@ app.delete("/api/wines/:id", (req, res) => {
     });
 });
 
+// Modifie une nouvelle référence
+app.put("/api/wines", upload.single("tag"), (req, res, next) => {
+  const wine = new Wine({
+    name: req.body.name,
+    domain: req.body.domain,
+    region: req.body.region,
+    year: req.body.year,
+    color: req.body.color,
+    price: req.body.price,
+    grapeVariety: req.body.grapeVariety,
+    biologic: req.body.biologic,
+    bestAfter: req.body.bestAfter,
+    bestBefore: req.body.bestBefore,
+    country: req.body.country,
+    tag: req.file.filename,
+    quantity: req.body.quantity,
+  });
+
+  wine
+    .save()
+    .then(() => console.log("Référence enregistrée !"))
+    .catch((err) => res.status(400).json({ err }));
+});
+
 module.exports = app;

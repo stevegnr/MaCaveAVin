@@ -7,23 +7,26 @@ import {
   faTrash,
   faCalendarCheck,
   faArrowRightLong,
+  faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import Tag from "../../utils/Tag/Tag";
 
 function WineShowed() {
   const context = useContext(MaCaveAVinContext);
-  const { showed, setShowed } = context.WineContext;
   const { newRef, setNewRef } = context.NewRefContext;
-
-  const [hover, setHover] = useState(false);
+  const { showWineModal, setShowWineModal } = context.WineModalContext;
+  const { wineShowed, setWineShowed } = context.WineContext;
+  
+  const [trashHover, setTrashHover] = useState(false);
+  const [editHover, setEditHover] = useState(false);
 
   const [quantity, setQuantity] = useState(0);
 
   useEffect(() => {
-    if (showed) {
-      setQuantity(parseInt(showed.quantity));
+    if (wineShowed) {
+      setQuantity(parseInt(wineShowed.quantity));
     }
-  }, [showed]);
+  }, [wineShowed]);
 
   function editQuantity(delta) {
     if (delta === -1 && quantity === 0) {
@@ -35,7 +38,7 @@ function WineShowed() {
   }
 
   async function changeQuantity(quantity) {
-    await fetch(`http://localhost:3000/api/wines/${showed._id}`, {
+    await fetch(`http://localhost:3000/api/wines/${wineShowed._id}`, {
       method: "PUT",
       body: JSON.stringify({ quantity }),
       headers: {
@@ -55,7 +58,7 @@ function WineShowed() {
   }
 
   async function deleteWine() {
-    await fetch(`http://localhost:3000/api/wines/${showed._id}`, {
+    await fetch(`http://localhost:3000/api/wines/${wineShowed._id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -71,44 +74,73 @@ function WineShowed() {
         console.error("There was a problem with the delete operation:", error);
       });
     setNewRef(!newRef);
-    setShowed(null);
+    setWineShowed(null);
   }
 
-  if (showed) {
+  async function editWine() {
+    await fetch(`http://localhost:3000/api/wines/${wineShowed._id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .catch((error) => {
+        console.error("There was a problem with the delete operation:", error);
+      });
+    setNewRef(!newRef);
+  }
+
+  if (wineShowed) {
     return (
       <WineShow>
-        <Color color={showed.color} />
+        <Color color={wineShowed.color} />
         <WineShowTitle>
-          {showed.name}
-          {showed.biologic && "🍀"}
+          {wineShowed.name}
+          {wineShowed.biologic && "🍀"}
         </WineShowTitle>
         <WineOrigin>
-          <p>{showed.domain}</p>
-          <p>{showed.region}</p>
+          <p>{wineShowed.domain}</p>
+          <p>{wineShowed.region}</p>
         </WineOrigin>
         <Tag
-          tag={showed.tag}
-          country={showed.country}
+          tag={wineShowed.tag}
+          country={wineShowed.country}
         />
         <WineShowYearAndGarde>
-          <h2>{showed.year}</h2>
+          <h2>{wineShowed.year}</h2>
+          <p>{wineShowed.price}€</p>
+
           <WineShowGarde>
             <FontAwesomeIcon
               icon={faCalendarCheck}
               size="xl"
               style={{ color: "#ac1c35" }}
             />
-            <p>{showed.bestAfter}</p>{" "}
+            <p>{wineShowed.bestAfter}</p>{" "}
             <FontAwesomeIcon
               icon={faArrowRightLong}
               style={{ color: "#ac1c35" }}
             />{" "}
-            <p>{showed.bestBefore}</p>
+            <p>{wineShowed.bestBefore}</p>
           </WineShowGarde>
         </WineShowYearAndGarde>
 
         <WineShowMenu>
-          <p>{showed.price}€</p>
+          <FontAwesomeIcon
+            icon={faPenToSquare}
+            beatFade={editHover}
+            size="lg"
+            style={{ color: "#ac1c35" }}
+            onMouseOver={() => setEditHover(true)}
+            onMouseLeave={() => setEditHover(false)}
+            onClick={() => setShowWineModal(true)}
+          />
           <WineShowButtons>
             <WineShowButton onClick={() => editQuantity(-1)}>-</WineShowButton>
             <p>
@@ -118,12 +150,12 @@ function WineShowed() {
           </WineShowButtons>
           <FontAwesomeIcon
             icon={faTrash}
-            beatFade={hover}
+            beatFade={trashHover}
             size="lg"
             style={{ color: "#ac1c35" }}
             onClick={() => deleteWine()}
-            onMouseOver={() => setHover(true)}
-            onMouseLeave={() => setHover(false)}
+            onMouseOver={() => setTrashHover(true)}
+            onMouseLeave={() => setTrashHover(false)}
           />
         </WineShowMenu>
       </WineShow>
@@ -177,7 +209,7 @@ const WineShowButton = styled.div`
   justify-content: center;
   align-items: center;
   font-size: 2em;
-  :hover {
+  :trashhover {
     background-color: white;
     color: #ac1c35;
   }

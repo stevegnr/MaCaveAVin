@@ -2,8 +2,13 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 
-function WineModal({ title, show, onClose }) {
-  if (!show) {
+function WineModal({ title, onClose }) {
+  const context = useContext(MaCaveAVinContext);
+  const { newRef, setNewRef } = context.NewRefContext;
+  const { showWineModal, setShowWineModal } = context.WineModalContext;
+
+
+  if (!showWineModal) {
     return null;
   }
 
@@ -20,8 +25,6 @@ function WineModal({ title, show, onClose }) {
   const [bestAfter, setBestAfter] = useState(year + 2);
   const [image, setImage] = useState(null);
 
-  const context = useContext(MaCaveAVinContext);
-  const { newRef, setNewRef } = context.NewRefContext;
 
   async function onSubmit() {
     const formData = new FormData();
@@ -38,7 +41,6 @@ function WineModal({ title, show, onClose }) {
     formData.append("bestAfter", bestAfter);
     formData.append("tag", image);
     onClose();
-    console.log(formData.country);
 
     await fetch("http://localhost:3000/api/wines", {
       method: "POST",
@@ -57,7 +59,7 @@ function WineModal({ title, show, onClose }) {
   }
 
   return (
-    <ModalOverlay onClick={onClose}>
+    <ModalOverlay onClick={() => setShowWineModal(false)}>
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
           <ModalTitle>

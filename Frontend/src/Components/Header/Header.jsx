@@ -1,20 +1,22 @@
-import React, { useState } from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Modal from "../Modal/WineModal";
+import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
+
 
 function Header() {
-  const [show, setShow] = useState(false);
+    const context = useContext(MaCaveAVinContext);
+    const { showWineModal, setShowWineModal } = context.WineModalContext;
 
   return (
     <Menu>
       <Banner>
         <h1>🍷 Ma Cave à Vin</h1>
-        <AddRef onClick={() => setShow(true)}>+</AddRef>
+        <AddRef onClick={() => setShowWineModal(true)}>+</AddRef>
       </Banner>
       <Modal
         title="Nouvelle référence"
-        show={show}
-        onClose={() => setShow(false)}></Modal>
+        onClose={() => setShowWineModal(false)}></Modal>
     </Menu>
   );
 }
@@ -57,8 +59,7 @@ const WineModal = styled.div`
   /* Black w/ opacity */
 `;
 
-const Menu = styled.div`
-`;
+const Menu = styled.div``;
 
 const AddRef = styled.div`
   width: 30px;
@@ -70,4 +71,4 @@ const AddRef = styled.div`
   align-items: center;
   font-size: 3em;
   margin-right: 30px;
-`
+`;

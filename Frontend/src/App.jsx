@@ -6,14 +6,16 @@ import Footer from "./Components/Footer/Footer";
 import Header from "./Components/Header/Header";
 
 function App() {
-  const [showed, setShowed] = useState(null);
+  const [wineShowed, setWineShowed] = useState(null);
   const [newRef, setNewRef] = useState(false);
+  const [showWineModal, setShowWineModal] = useState(false);
 
   return (
     <MaCaveAVinContext.Provider
       value={{
-        WineContext: { showed, setShowed },
+        WineContext: { wineShowed, setWineShowed },
         NewRefContext: { newRef, setNewRef },
+        WineModalContext: { showWineModal, setShowWineModal },
       }}>
       <Header />
       <WinesInMyCave />;

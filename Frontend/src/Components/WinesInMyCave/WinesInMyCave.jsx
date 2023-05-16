@@ -11,7 +11,7 @@ function WinesInMyCave() {
 
   const context = useContext(MaCaveAVinContext);
 
-  const showed = context.WineContext.showed;
+  const wineShowed = context.WineContext.wineShowed;
 
   const newRef = context.NewRefContext.newRef;
 
@@ -32,7 +32,7 @@ function WinesInMyCave() {
 
   return (
     <Main>
-      <WineShowed showed={showed} />
+      <WineShowed wineShowed={wineShowed} />
       <WinesWindow>
         {!isDataLoading ? (
           winesList.map(
