@@ -2,33 +2,43 @@ import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 
-function WineModal({ title, onClose }) {
+function WineModal({ onClose }) {
   const context = useContext(MaCaveAVinContext);
+  const { wineShowed, setWineShowed } = context.WineContext;
   const { newRef, setNewRef } = context.NewRefContext;
   const { showWineModal, setShowWineModal } = context.WineModalContext;
-
+  const { editModal, setEditModal } = context.EditModalContext;
 
   if (!showWineModal) {
     return null;
   }
 
-  const [name, setName] = useState("");
-  const [year, setYear] = useState(2022);
-  const [color, setColor] = useState("red");
-  const [quantity, setQuantity] = useState(1);
-  const [price, setPrice] = useState(0);
-  const [domain, setDomain] = useState("");
-  const [region, setRegion] = useState("");
-  const [country, setCountry] = useState("france");
-  const [biologic, setBiologic] = useState(false);
-  const [bestBefore, setBestBefore] = useState(year + 1);
-  const [bestAfter, setBestAfter] = useState(year + 2);
-  const [image, setImage] = useState(null);
-
+  const [name, setName] = useState(editModal ? wineShowed.name : "");
+  const [year, setYear] = useState(editModal ? wineShowed.year : 2022);
+  const [color, setColor] = useState(editModal ? wineShowed.color : "red");
+  const [quantity, setQuantity] = useState(editModal ? wineShowed.quantity : 1);
+  const [price, setPrice] = useState(editModal ? wineShowed.price : 0);
+  const [domain, setDomain] = useState(editModal ? wineShowed.domain : "");
+  const [region, setRegion] = useState(editModal ? wineShowed.region : "");
+  const [country, setCountry] = useState(
+    editModal ? wineShowed.country : "france"
+  );
+  const [biologic, setBiologic] = useState(
+    editModal ? wineShowed.biologic : false
+  );
+  const [bestBefore, setBestBefore] = useState(
+    editModal ? wineShowed.bestBefore : year + 1
+  );
+  const [bestAfter, setBestAfter] = useState(
+    editModal ? wineShowed.bestAfter : year + 2
+  );
+  const [image, setImage] = useState(editModal ? wineShowed.image : null);
 
   async function onSubmit() {
     const formData = new FormData();
+
     formData.append("name", name);
+    console.log(name);
     formData.append("year", year);
     formData.append("color", color);
     formData.append("quantity", quantity);
@@ -41,20 +51,43 @@ function WineModal({ title, onClose }) {
     formData.append("bestAfter", bestAfter);
     formData.append("tag", image);
     onClose();
+    for (const [key, value] of formData.entries()) {
+      console.log(key + ": " + value);
+    }
 
-    await fetch("http://localhost:3000/api/wines", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
+
+    if (editModal) {
+      console.log({ editModal: editModal });
+      console.log("wineShowed._id : ", wineShowed._id);
+      await fetch(`http://localhost:3000/api/wines/edit/${wineShowed._id}`, {
+        method: "PUT",
+        body: formData
       })
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          console.error("There was a problem with the edit operation:", error);
+        });
+    } else {
+      await fetch("http://localhost:3000/api/wines", {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Network response was not ok");
+          }
+          return response.json();
+        })
+        .catch((error) => {
+          console.error("There was a problem with the post operation:", error);
+        });
+    }
+
     setNewRef(!newRef);
   }
 
@@ -63,7 +96,11 @@ function WineModal({ title, onClose }) {
       <ModalContent onClick={(e) => e.stopPropagation()}>
         <ModalHeader>
           <ModalTitle>
-            <h3>{title}</h3>
+            <h3>
+              {editModal
+                ? `Modifier : ${wineShowed.name}`
+                : "Nouvelle référence"}
+            </h3>
           </ModalTitle>
         </ModalHeader>
         <ModalBody>
@@ -76,8 +113,8 @@ function WineModal({ title, onClose }) {
                   <input
                     value={name}
                     type="text"
-                    name="name"
                     id="name"
+                    name="name"
                     onChange={(e) => setName(e.target.value)}
                   />
                 </label>
@@ -85,6 +122,7 @@ function WineModal({ title, onClose }) {
                   Année :
                   <input
                     type="number"
+                    id="year"
                     name="year"
                     min="1900"
                     max="2024"
@@ -161,7 +199,7 @@ function WineModal({ title, onClose }) {
                   <input
                     type="text"
                     name="region"
-                    _id="region"
+                    id="region"
                     onChange={(e) => setRegion(e.target.value)}
                     defaultValue={region}
                   />
@@ -198,27 +236,25 @@ function WineModal({ title, onClose }) {
                     <option value="switzerland">Suisse</option>
                   </select>
                 </label>
-                <label htmlFor="biologic">
-                  Bio ?
-                  <label htmlFor="bio">
-                    Oui
-                    <input
-                      type="radio"
-                      name="bio"
-                      id="bio"
-                      onChange={(e) => setBiologic(true)}
-                    />
-                  </label>
-                  <label htmlFor="notbio">
-                    Non
-                    <input
-                      type="radio"
-                      name="bio"
-                      id="notbio"
-                      defaultChecked
-                      onChange={(e) => setBiologic(false)}
-                    />
-                  </label>
+                Bio ?
+                <label htmlFor="bio">
+                  Oui 🍀
+                  <input
+                    type="radio"
+                    name="bio"
+                    id="bio"
+                    onChange={(e) => setBiologic(true)}
+                  />
+                </label>
+                <label htmlFor="notbio">
+                  Non
+                  <input
+                    type="radio"
+                    name="bio"
+                    id="notbio"
+                    defaultChecked
+                    onChange={(e) => setBiologic(false)}
+                  />
                 </label>
               </ModalDiv>
             </fieldset>
@@ -256,7 +292,9 @@ function WineModal({ title, onClose }) {
           </form>
         </ModalBody>
         <ModalFooter>
-          <ModalButton onClick={onSubmit}>Ajouter</ModalButton>
+          <ModalButton onClick={onSubmit}>
+            {editModal ? "Modifier" : "Ajouter"}
+          </ModalButton>
           <ModalButton onClick={onClose}>Annuler</ModalButton>
         </ModalFooter>
       </ModalContent>

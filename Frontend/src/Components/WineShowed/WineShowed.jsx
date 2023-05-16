@@ -10,13 +10,15 @@ import {
   faPenToSquare,
 } from "@fortawesome/free-solid-svg-icons";
 import Tag from "../../utils/Tag/Tag";
+import BestWith from "../../utils/BestWith/BestWith";
 
 function WineShowed() {
   const context = useContext(MaCaveAVinContext);
   const { newRef, setNewRef } = context.NewRefContext;
   const { showWineModal, setShowWineModal } = context.WineModalContext;
   const { wineShowed, setWineShowed } = context.WineContext;
-  
+  const { editModal, setEditModal } = context.EditModalContext;
+
   const [trashHover, setTrashHover] = useState(false);
   const [editHover, setEditHover] = useState(false);
 
@@ -77,23 +79,9 @@ function WineShowed() {
     setWineShowed(null);
   }
 
-  async function editWine() {
-    await fetch(`http://localhost:3000/api/wines/${wineShowed._id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .catch((error) => {
-        console.error("There was a problem with the delete operation:", error);
-      });
-    setNewRef(!newRef);
+  function handleClickEdit() {
+    setEditModal(true);
+    setShowWineModal(true);
   }
 
   if (wineShowed) {
@@ -112,6 +100,7 @@ function WineShowed() {
           tag={wineShowed.tag}
           country={wineShowed.country}
         />
+        <BestWith/>
         <WineShowYearAndGarde>
           <h2>{wineShowed.year}</h2>
           <p>{wineShowed.price}€</p>
@@ -139,7 +128,7 @@ function WineShowed() {
             style={{ color: "#ac1c35" }}
             onMouseOver={() => setEditHover(true)}
             onMouseLeave={() => setEditHover(false)}
-            onClick={() => setShowWineModal(true)}
+            onClick={() => handleClickEdit()}
           />
           <WineShowButtons>
             <WineShowButton onClick={() => editQuantity(-1)}>-</WineShowButton>
@@ -235,4 +224,8 @@ const WineShowGarde = styled.div`
 const WineShowYearAndGarde = styled.div`
   display: flex;
   justify-content: space-between;
+  position: absolute;
+  bottom: 45%;
+  left: 5px;
+  right: 5px;
 `;

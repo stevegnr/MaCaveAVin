@@ -236,9 +236,11 @@ app.delete("/api/wines/:id", (req, res) => {
     });
 });
 
-// Modifie une nouvelle référence
-app.put("/api/wines", upload.single("tag"), (req, res, next) => {
-  const wine = new Wine({
+// Modifie une référence
+app.put("/api/wines/edit/:id", upload.single("tag"), (req, res, next) => {
+  const id = req.params.id;
+  console.log(id);
+  const update = {
     name: req.body.name,
     domain: req.body.domain,
     region: req.body.region,
@@ -250,13 +252,17 @@ app.put("/api/wines", upload.single("tag"), (req, res, next) => {
     bestAfter: req.body.bestAfter,
     bestBefore: req.body.bestBefore,
     country: req.body.country,
-    tag: req.file.filename,
     quantity: req.body.quantity,
-  });
+  };
 
-  wine
-    .save()
-    .then(() => console.log("Référence enregistrée !"))
+    if (req.file) {
+      update.tag = req.file.filename;
+    }
+  Wine.findByIdAndUpdate(id, update, { new: true })
+    .then((updatedWine) => {
+      res.json(updatedWine);
+    })
+    .then(() => console.log("Référence modifiée !"))
     .catch((err) => res.status(400).json({ err }));
 });
 
