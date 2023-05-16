@@ -100,7 +100,7 @@ function WineShowed() {
           tag={wineShowed.tag}
           country={wineShowed.country}
         />
-        <BestWith/>
+        <BestWith pairing={"beef, fish, chicken, pork, vegetable, cheese"} />
         <WineShowYearAndGarde>
           <h2>{wineShowed.year}</h2>
           <p>{wineShowed.price}€</p>
