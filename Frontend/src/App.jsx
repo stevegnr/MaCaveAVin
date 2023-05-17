@@ -11,6 +11,7 @@ function App() {
   const [showWineModal, setShowWineModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [search, setSearch] = useState(null);
+  const [colorFilter, setColorFilter] = useState('all')
 
   return (
     <MaCaveAVinContext.Provider
@@ -20,6 +21,7 @@ function App() {
         WineModalContext: { showWineModal, setShowWineModal },
         EditModalContext: { editModal, setEditModal },
         SearchContext: { search, setSearch },
+        ColorFilterContext: {colorFilter, setColorFilter}
       }}>
       <Header />
       <WinesInMyCave />;

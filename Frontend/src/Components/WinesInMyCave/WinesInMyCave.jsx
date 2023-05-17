@@ -16,6 +16,7 @@ function WinesInMyCave() {
   const newRef = context.NewRefContext.newRef;
   const { search, setSearch } = context.SearchContext;
 
+  const { colorFilter, setColorFilter } = context.ColorFilterContext;
 
   useEffect(() => {
     async function fetchWine() {
@@ -31,9 +32,22 @@ function WinesInMyCave() {
   }, [newRef, search]);
 
   const MemoizedWineReference = memo(WineReference);
-  const filteredWines = search ? winesList.filter((item) => item.name.toLowerCase().includes(search.toLowerCase() )) : winesList;
-  console.log(search);
-  
+
+  // Search
+  const searchedWines = search
+    ? winesList.filter((item) =>
+        item.name.toLowerCase().includes(search.toLowerCase())
+      )
+    : winesList;
+
+  // Color filter
+  const filteredWines = colorFilter !== 'all'
+    ? searchedWines.filter((item) => 
+        item.color === colorFilter
+      )
+    : searchedWines;
+
+
   return (
     <Main>
       <WineShowed wineShowed={wineShowed} />

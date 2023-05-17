@@ -10,6 +10,7 @@ function Header() {
   const { showWineModal, setShowWineModal } = context.WineModalContext;
   const { search, setSearch } = context.SearchContext;
   const [shake, setShake] = useState(false);
+  const { colorFilter, setColorFilter } = context.ColorFilterContext;
 
   return (
     <Menu>
@@ -31,6 +32,12 @@ function Header() {
               onBlur={() => setShake(false)}
               onChange={(e) => setSearch(e.target.value)}
             />
+            <Filter onChange={(e) => setColorFilter(e.target.value)}>
+              <option value="all">Sélectionner couleur</option>
+              <option value="white">Blanc</option>
+              <option value="pink">Rosé</option>
+              <option value="red">Rouge</option>
+            </Filter>
           </Search>
         </BannerMenu>
       </Banner>
@@ -108,5 +115,10 @@ const Search = styled.div`
 
 const SearchField = styled.input`
   border: 1px solid white;
+  border-radius: 5px;
+  `;
+
+const Filter = styled.select`
+border: 1px solid white;
   border-radius: 5px;
 `;
