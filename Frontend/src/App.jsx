@@ -10,6 +10,7 @@ function App() {
   const [newRef, setNewRef] = useState(false);
   const [showWineModal, setShowWineModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
+  const [search, setSearch] = useState(null);
 
   return (
     <MaCaveAVinContext.Provider
@@ -18,6 +19,7 @@ function App() {
         NewRefContext: { newRef, setNewRef },
         WineModalContext: { showWineModal, setShowWineModal },
         EditModalContext: { editModal, setEditModal },
+        SearchContext: { search, setSearch },
       }}>
       <Header />
       <WinesInMyCave />;

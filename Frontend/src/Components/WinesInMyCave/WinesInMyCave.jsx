@@ -14,6 +14,8 @@ function WinesInMyCave() {
   const wineShowed = context.WineContext.wineShowed;
 
   const newRef = context.NewRefContext.newRef;
+  const { search, setSearch } = context.SearchContext;
+
 
   useEffect(() => {
     async function fetchWine() {
@@ -26,16 +28,18 @@ function WinesInMyCave() {
       setDataLoading(false);
     }
     fetchWine();
-  }, [newRef]);
+  }, [newRef, search]);
 
   const MemoizedWineReference = memo(WineReference);
-
+  const filteredWines = search ? winesList.filter((item) => item.name.toLowerCase().includes(search.toLowerCase() )) : winesList;
+  console.log(search);
+  
   return (
     <Main>
       <WineShowed wineShowed={wineShowed} />
       <WinesWindow>
         {!isDataLoading ? (
-          winesList.map(
+          filteredWines.map(
             ({
               _id,
               name,

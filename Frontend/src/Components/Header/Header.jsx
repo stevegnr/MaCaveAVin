@@ -1,18 +1,38 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import styled from "styled-components";
 import Modal from "../Modal/WineModal";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 
 function Header() {
-    const context = useContext(MaCaveAVinContext);
-    const { showWineModal, setShowWineModal } = context.WineModalContext;
+  const context = useContext(MaCaveAVinContext);
+  const { showWineModal, setShowWineModal } = context.WineModalContext;
+  const { search, setSearch } = context.SearchContext;
+  const [shake, setShake] = useState(false);
 
   return (
     <Menu>
       <Banner>
         <h1>🍷 Ma Cave à Vin</h1>
-        <AddRef onClick={() => setShowWineModal(true)}>+</AddRef>
+        <BannerMenu>
+          <AddRef onClick={() => setShowWineModal(true)}>+</AddRef>
+          <Search>
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              shake={shake}
+              style={{ color: "#ffffff" }}
+              size="lg"
+            />
+            <SearchField
+              type="text"
+              placeholder="Rechercher..."
+              onFocus={() => setShake(true)}
+              onBlur={() => setShake(false)}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </Search>
+        </BannerMenu>
       </Banner>
       <Modal
         title="Nouvelle référence"
@@ -26,7 +46,8 @@ export default Header;
 const Banner = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 110px;
   height: 50px;
   background-color: #ac1c35;
   color: white;
@@ -36,6 +57,13 @@ const Banner = styled.div`
   left: 0;
   right: 0;
   z-index: 1;
+`;
+
+const BannerMenu = styled.div`
+  display: flex;
+  height: 100%;
+  align-items: center;
+  gap: 40px;
 `;
 
 const WineModal = styled.div`
@@ -71,4 +99,14 @@ const AddRef = styled.div`
   align-items: center;
   font-size: 3em;
   margin-right: 30px;
+`;
+
+const Search = styled.div`
+  display: flex;
+  gap: 5px;
+`;
+
+const SearchField = styled.input`
+  border: 1px solid white;
+  border-radius: 5px;
 `;

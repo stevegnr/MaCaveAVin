@@ -37,7 +37,7 @@ const InsertedFlag = styled.div`
 
 const TagAndFlag = styled.div`
   width: 90%;
-  height: 35%;
+  height: 33%;
   border-radius: 5px;
   left: 50%;
   bottom: 40px;

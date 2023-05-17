@@ -26,8 +26,13 @@ function WineReference({
   const setWineShowed = context.WineContext.setWineShowed;
   const { search, setSearch } = context.SearchContext;
 
-
   let newTag = "http://www.localhost:3000/" + tag;
+  let searchedText = search
+    ? name.replace(
+        new RegExp(search, "gi"),
+        `<span style="background-color: yellow">$&</span>`
+      )
+    : name;
 
   return (
     <WineRef
@@ -50,13 +55,10 @@ function WineReference({
       }>
       <div>
         <Color color={color} />
-        <h3>
-          {search ? name.replace(
-            new RegExp(search, "gi"),
-            "<span class='mise-en-valeur'>$&</span>"
-          ): name}
-          {biologic && "🍀"}
-        </h3>
+        <div>
+          <h3 dangerouslySetInnerHTML={{ __html: searchedText }} />
+          <h3>{biologic && "🍀"}</h3>
+        </div>
       </div>
 
       <p>{domain}</p>
