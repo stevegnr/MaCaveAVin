@@ -55,11 +55,10 @@ function WineModal({ onClose }) {
       console.log(key + ": " + value);
     }
 
-
     if (editModal) {
       await fetch(`http://localhost:3000/api/wines/edit/${wineShowed._id}`, {
         method: "PUT",
-        body: formData
+        body: formData,
       })
         .then((response) => {
           if (!response.ok) {
@@ -70,7 +69,7 @@ function WineModal({ onClose }) {
         .catch((error) => {
           console.error("There was a problem with the edit operation:", error);
         });
-      setEditModal(!editModal)
+      setEditModal(!editModal);
     } else {
       await fetch("http://localhost:3000/api/wines", {
         method: "POST",
@@ -341,7 +340,19 @@ const ModalBody = styled.div`
   border-bottom: 1px solid #eee;
 `;
 
-const ModalButton = styled.div``;
+const ModalButton = styled.div`
+  height: 30px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightgrey;
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  :hover {
+    background-color: white;
+  }
+`;
 
 const ModalDiv = styled.div`
   display: flex;
