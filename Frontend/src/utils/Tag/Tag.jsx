@@ -43,5 +43,5 @@ const TagAndFlag = styled.div`
   bottom: 40px;
   transform: translate(-50%);
   position: absolute;
-  border: 1px solid black;
+  border: 3px solid white;
 `;
