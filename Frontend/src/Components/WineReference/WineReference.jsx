@@ -24,6 +24,8 @@ function WineReference({
   biologic = biologic === "true";
   const context = useContext(MaCaveAVinContext);
   const setWineShowed = context.WineContext.setWineShowed;
+  const { search, setSearch } = context.SearchContext;
+
 
   let newTag = "http://www.localhost:3000/" + tag;
 
@@ -49,7 +51,11 @@ function WineReference({
       <div>
         <Color color={color} />
         <h3>
-          {name} {biologic && "🍀"}
+          {search ? name.replace(
+            new RegExp(search, "gi"),
+            "<span class='mise-en-valeur'>$&</span>"
+          ): name}
+          {biologic && "🍀"}
         </h3>
       </div>
 
