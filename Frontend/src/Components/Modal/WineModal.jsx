@@ -57,8 +57,6 @@ function WineModal({ onClose }) {
 
 
     if (editModal) {
-      console.log({ editModal: editModal });
-      console.log("wineShowed._id : ", wineShowed._id);
       await fetch(`http://localhost:3000/api/wines/edit/${wineShowed._id}`, {
         method: "PUT",
         body: formData
@@ -72,6 +70,7 @@ function WineModal({ onClose }) {
         .catch((error) => {
           console.error("There was a problem with the edit operation:", error);
         });
+      setEditModal(!editModal)
     } else {
       await fetch("http://localhost:3000/api/wines", {
         method: "POST",
