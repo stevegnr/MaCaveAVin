@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useRef, useState } from "react";
 import styled from "styled-components";
 import Modal from "../Modal/WineModal";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
@@ -11,6 +11,16 @@ function Header() {
   const { search, setSearch } = context.SearchContext;
   const [shake, setShake] = useState(false);
   const { colorFilter, setColorFilter } = context.ColorFilterContext;
+
+  const inputSearchRef = useRef(null);
+
+  function handleKeyDown(e) {
+    if (e.code === "Escape") {
+      inputSearchRef.current.blur();
+      inputSearchRef.current.value = null;
+      setSearch(null)
+    }
+  }
 
   return (
     <Menu>
@@ -31,6 +41,8 @@ function Header() {
               onFocus={() => setShake(true)}
               onBlur={() => setShake(false)}
               onChange={(e) => setSearch(e.target.value)}
+              ref={inputSearchRef}
+              onKeyDown={(e) => handleKeyDown(e)}
             />
             <Filter onChange={(e) => setColorFilter(e.target.value)}>
               <option value="all">Sélectionner couleur</option>
@@ -43,7 +55,8 @@ function Header() {
       </Banner>
       <Modal
         title="Nouvelle référence"
-        onClose={() => setShowWineModal(false)}></Modal>
+        onClose={() => setShowWineModal(false)}
+      />
     </Menu>
   );
 }
@@ -97,14 +110,14 @@ const WineModal = styled.div`
 const Menu = styled.div``;
 
 const AddRef = styled.div`
-  width: 30px;
-  height: 30px;
-  border: 5px solid white;
+  width: 20px;
+  height: 20px;
+  border: 3px solid white;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3em;
+  font-size: 2em;
   margin-right: 30px;
 `;
 
@@ -116,9 +129,9 @@ const Search = styled.div`
 const SearchField = styled.input`
   border: 1px solid white;
   border-radius: 5px;
-  `;
+`;
 
 const Filter = styled.select`
-border: 1px solid white;
+  border: 1px solid white;
   border-radius: 5px;
 `;

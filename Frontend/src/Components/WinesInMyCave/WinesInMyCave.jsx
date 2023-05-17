@@ -4,6 +4,7 @@ import WineReference from "../WineReference/WineReference";
 import WineShowed from "../WineShowed/WineShowed";
 import { MaCaveAVinContext } from "../../../Context/MaCaveAVinContext";
 import Loader from "../../utils/Loader/Loader";
+import Empty from "../../utils/Empty/Empty";
 
 function WinesInMyCave() {
   const [winesList, setWinesList] = useState([]);
@@ -41,50 +42,52 @@ function WinesInMyCave() {
     : winesList;
 
   // Color filter
-  const filteredWines = colorFilter !== 'all'
-    ? searchedWines.filter((item) => 
-        item.color === colorFilter
-      )
-    : searchedWines;
-
+  const filteredWines =
+    colorFilter !== "all"
+      ? searchedWines.filter((item) => item.color === colorFilter)
+      : searchedWines;
 
   return (
     <Main>
       <WineShowed wineShowed={wineShowed} />
       <WinesWindow>
         {!isDataLoading ? (
-          filteredWines.map(
-            ({
-              _id,
-              name,
-              domain,
-              region,
-              year,
-              color,
-              price,
-              biologic,
-              bestBefore,
-              bestAfter,
-              country,
-              tag,
-              quantity,
-            }) => (
-              <MemoizedWineReference
-                key={_id}
-                _id={_id}
-                name={name}
-                domain={domain}
-                region={region}
-                year={year}
-                color={color}
-                price={price}
-                biologic={biologic}
-                bestBefore={bestBefore}
-                bestAfter={bestAfter}
-                country={country}
-                tag={tag}
-                quantity={quantity}
-              />
+          filteredWines.length === 0 ? (
+            <Empty />
+          ) : (
+            filteredWines.map(
+              ({
+                _id,
+                name,
+                domain,
+                region,
+                year,
+                color,
+                price,
+                biologic,
+                bestBefore,
+                bestAfter,
+                country,
+                tag,
+                quantity,
+              }) => (
+                <MemoizedWineReference
+                  key={_id}
+                  _id={_id}
+                  name={name}
+                  domain={domain}
+                  region={region}
+                  year={year}
+                  color={color}
+                  price={price}
+                  biologic={biologic}
+                  bestBefore={bestBefore}
+                  bestAfter={bestAfter}
+                  country={country}
+                  tag={tag}
+                  quantity={quantity}
+                />
+              )
             )
           )
         ) : (
