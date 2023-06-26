@@ -14,19 +14,15 @@ const WineColor = styled.div`
     switch (props.color) {
       case "red":
         return "#ac1c35";
-        break;
 
       case "pink":
         return "#dd81a4";
-        break;
 
       case "white":
         return "#ede239";
-        break;
 
       default:
         return "white";
-        break;
     }
   }};
 `;
