@@ -24,7 +24,7 @@ function JokesAndQuotes() {
     "A la première coupe, l'homme boit le vin ; à la deuxième coupe, le vin boit le vin ; à la troisième coupe, le vin boit l'homme. - Proverbe japonais",
     "Il y a plus de philosophie dans une bouteille de vin que dans tous les livres. - Louis Pasteur",
     "Il existe cinq bonnes raisons de boire : L'arrivée d'un hôte, la soif présente et à venir, le bon goût du vin et n'importe quelle autre raison. - Proverbe latin",
-    "Boire du vin et étreindre la beauté Vaut mieux que l'hypocrisie du dévot. - Omar Khayyam",
+    "Boire du vin et étreindre la beauté vaut mieux que l'hypocrisie du dévot. - Omar Khayyam",
     "Trop ou trop peu de vin interdit la vérité. - Blaise Pascal",
     "Bonne cuisine et bon vin, c'est le paradis sur terre. - Henri IV",
     "Le vin est un professeur de goût, il est le libérateur de l'esprit et l'illuminateur de l'intelligence. - Paul Claudel",
